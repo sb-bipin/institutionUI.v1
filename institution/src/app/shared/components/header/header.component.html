@@ -1,0 +1,84 @@
+<header class="header" [class.sticky]="isSticky">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <a routerLink="/home">
+                    <img src="assets/images/logo.png" alt="NWA College" />
+                </a>
+            </div>
+
+            <button class="menu-toggle" (click)="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" [class.active]="isMenuOpen">
+                <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+
+                <li class="dropdown">
+                    <a>About Us <i class="arrow-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/about/academy">Nepal Western Academy</a></li>
+                        <li><a routerLink="/about/director">Director Message</a></li>
+                        <li><a routerLink="/about/academic-director">Academic Director's Message</a></li>
+                        <li><a routerLink="/about/universities">Affiliated Universities</a></li>
+                        <li><a routerLink="/about/programs-info">Programs Information</a></li>
+                        <li><a routerLink="/about/management">Management Profile</a></li>
+                        <li class="dropdown">
+                            <a>Human Resources <i class="arrow-right"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a routerLink="/about/academic-admin">Academic Administration</a></li>
+                                <li><a routerLink="/about/academic-resources">Academic Resources</a></li>
+                                <li><a routerLink="/about/general-admin">General Administration</a></li>
+                            </ul>
+                        </li>
+                        <li><a routerLink="/about/facilities">Facilities and Supports</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a>Programs <i class="arrow-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/programs/bba">BBA</a></li>
+                        <li><a routerLink="/programs/bhm">BHM</a></li>
+                        <li><a routerLink="/programs/bba-finance">BBA (Finance)</a></li>
+                    </ul>
+                </li>
+
+                <li><a routerLink="/notice" routerLinkActive="active">Notice</a></li>
+                <li><a routerLink="/admission" routerLinkActive="active">Admission</a></li>
+                <li><a routerLink="/news" routerLinkActive="active">Blogs</a></li>
+                <li><a routerLink="/events" routerLinkActive="active">Events</a></li>
+                <li><a routerLink="/gallery" routerLinkActive="active">Image Gallery</a></li>
+                <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+
+                <li class="dropdown">
+                    <a>Syllabus <i class="arrow-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/syllabus/bba">BBA</a></li>
+                        <li><a routerLink="/syllabus/bhm">BHM</a></li>
+                        <li><a routerLink="/syllabus/bba-finance">BBA Finance/BBA BI</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a>Downloads <i class="arrow-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://play.google.com/store/apps/details?id=com.fest.erpapp_nwa"
+                                target="_blank">Download App</a></li>
+                        <li class="dropdown">
+                            <a>Question Bank <i class="arrow-right"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a routerLink="/questions/bba">BBA (Old Questions)</a></li>
+                                <li><a routerLink="/questions/bhm">BHM (Old Questions)</a></li>
+                                <li><a routerLink="/questions/bba-finance">BBA Finance (Old)</a></li>
+                                <li><a routerLink="/questions/bba-bi">BBA BI (Old Questions)</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

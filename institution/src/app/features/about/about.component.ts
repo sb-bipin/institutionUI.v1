@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
   template: `
     <section class="about-section py-5">
       <div class="container">
-        <!-- Hero Section -->
        <div class="row align-items-center mb-5">
   <div class="col-lg-6 mb-4 mb-lg-0">
     <div class="about-image-wrapper position-relative">
@@ -119,7 +118,7 @@ import { RouterModule } from '@angular/router';
     </div>
   </div>
 </div>
- -->
+
 
         <div class="row g-4 mb-5">
           <div class="col-lg-4">

@@ -17,7 +17,7 @@ export const routes: Routes = [
                 path: 'about',
                 loadComponent: () =>
                     import('./features/about/about.component')
-                        .then(m => m.AboutComponent)
+                        .then(m => m.AboutSectionComponent)
             },
             {
                 path: 'programs',

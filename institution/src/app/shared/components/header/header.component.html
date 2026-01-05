@@ -1,84 +1,131 @@
-<header class="header" [class.sticky]="isSticky">
-    <div class="container">
-        <nav class="navbar">
-            <div class="logo">
-                <a routerLink="/home">
-                    <img src="assets/images/logo.png" alt="NWA College" />
-                </a>
-            </div>
+<!-- Main Header -->
+<header class="main-header" [ngClass]="{ 'sticky-header': isSticky }">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid px-3 px-lg-5">
 
-            <button class="menu-toggle" (click)="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+            <a class="navbar-brand d-flex align-items-center py-2" routerLink="/home">
+                <img src="assets/images/logo-header.jpg" alt="NWA College" class="logo-img img-fluid" />
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" (click)="toggleMenu()"
+                [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
-            <ul class="nav-menu" [class.active]="isMenuOpen">
-                <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+            <div class="collapse navbar-collapse" [ngClass]="{ show: isMenuOpen }">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
 
-                <li class="dropdown">
-                    <a>About Us <i class="arrow-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="/about/academy">Nepal Western Academy</a></li>
-                        <li><a routerLink="/about/director">Director Message</a></li>
-                        <li><a routerLink="/about/academic-director">Academic Director's Message</a></li>
-                        <li><a routerLink="/about/universities">Affiliated Universities</a></li>
-                        <li><a routerLink="/about/programs-info">Programs Information</a></li>
-                        <li><a routerLink="/about/management">Management Profile</a></li>
-                        <li class="dropdown">
-                            <a>Human Resources <i class="arrow-right"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a routerLink="/about/academic-admin">Academic Administration</a></li>
-                                <li><a routerLink="/about/academic-resources">Academic Resources</a></li>
-                                <li><a routerLink="/about/general-admin">General Administration</a></li>
-                            </ul>
-                        </li>
-                        <li><a routerLink="/about/facilities">Facilities and Supports</a></li>
-                    </ul>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/home" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            Home
+                        </a>
+                    </li>
 
-                <li class="dropdown">
-                    <a>Programs <i class="arrow-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="/programs/bba">BBA</a></li>
-                        <li><a routerLink="/programs/bhm">BHM</a></li>
-                        <li><a routerLink="/programs/bba-finance">BBA (Finance)</a></li>
-                    </ul>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button">
+                            About Us
+                        </a>
 
-                <li><a routerLink="/notice" routerLinkActive="active">Notice</a></li>
-                <li><a routerLink="/admission" routerLinkActive="active">Admission</a></li>
-                <li><a routerLink="/news" routerLinkActive="active">Blogs</a></li>
-                <li><a routerLink="/events" routerLinkActive="active">Events</a></li>
-                <li><a routerLink="/gallery" routerLinkActive="active">Image Gallery</a></li>
-                <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/about">Nepal Western Academy</a></li>
+                            <li><a class="dropdown-item" routerLink="/about/director">Director Message</a></li>
+                            <li><a class="dropdown-item" routerLink="/about/academic-director">Academic Director's
+                                    Message</a></li>
+                            <li><a class="dropdown-item" routerLink="/about/universities">Affiliated Universities</a>
+                            </li>
+                            <li><a class="dropdown-item" routerLink="/about/programs-info">Programs Information</a></li>
+                            <li><a class="dropdown-item" routerLink="/about/management">Management Profile</a></li>
 
-                <li class="dropdown">
-                    <a>Syllabus <i class="arrow-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="/syllabus/bba">BBA</a></li>
-                        <li><a routerLink="/syllabus/bhm">BHM</a></li>
-                        <li><a routerLink="/syllabus/bba-finance">BBA Finance/BBA BI</a></li>
-                    </ul>
-                </li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">
+                                    Human Resources
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" routerLink="/about/academic-admin">Academic
+                                            Administration</a></li>
+                                    <li><a class="dropdown-item" routerLink="/about/academic-resources">Academic
+                                            Resources</a></li>
+                                    <li><a class="dropdown-item" routerLink="/about/general-admin">General
+                                            Administration</a></li>
+                                </ul>
+                            </li>
 
-                <li class="dropdown">
-                    <a>Downloads <i class="arrow-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="https://play.google.com/store/apps/details?id=com.fest.erpapp_nwa"
-                                target="_blank">Download App</a></li>
-                        <li class="dropdown">
-                            <a>Question Bank <i class="arrow-right"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a routerLink="/questions/bba">BBA (Old Questions)</a></li>
-                                <li><a routerLink="/questions/bhm">BHM (Old Questions)</a></li>
-                                <li><a routerLink="/questions/bba-finance">BBA Finance (Old)</a></li>
-                                <li><a routerLink="/questions/bba-bi">BBA BI (Old Questions)</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                            <li><a class="dropdown-item" routerLink="/about/facilities">Facilities and Supports</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button">
+                            Programs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <h6 class="dropdown-header">Undergraduate</h6>
+                            </li>
+                            <li><a class="dropdown-item" routerLink="/programs/bba">BBA</a></li>
+                            <li><a class="dropdown-item" routerLink="/programs/bhm">BHM</a></li>
+                            <li><a class="dropdown-item" routerLink="/programs/bba-finance">BBA – Finance</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" routerLink="/notice">Notice</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger fw-bold" routerLink="/admission">Admission</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/news">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/gallery">Image Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-danger" href="#" role="button">
+                            Syllabus
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/syllabus/bba">BBA</a></li>
+                            <li><a class="dropdown-item" routerLink="/syllabus/bhm">BHM</a></li>
+                            <li><a class="dropdown-item" routerLink="/syllabus/bba-finance">BBA Finance / BI</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-danger" href="#" role="button">
+                            Downloads
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" target="_blank"
+                                    href="https://play.google.com/store/apps/details?id=com.fest.erpapp_nwa">
+                                    <i class="fab fa-android text-success me-2"></i> Download App
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" target="_blank" href="#">
+                                    <i class="fas fa-download text-primary me-2"></i> New App Download
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Question Bank</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" routerLink="/questions/bba">BBA</a></li>
+                                    <li><a class="dropdown-item" routerLink="/questions/bhm">BHM</a></li>
+                                    <li><a class="dropdown-item" routerLink="/questions/bba-finance">BBA Finance</a>
+                                    </li>
+                                    <li><a class="dropdown-item" routerLink="/questions/bba-bi">BBA BI</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>

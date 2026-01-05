@@ -1,654 +1,531 @@
-/* ============================================
-   DASHBOARD HOME COMPONENT STYLES
-   src/app/features/dashboard/dashboard-home/dashboard-home.component.css
-   ============================================ */
+// Custom Variables
+$primary-color: #0d6efd;
+$secondary-color: #6c757d;
+$success-color: #198754;
+$info-color: #0dcaf0;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
 
-/* Hero Slider Section */
+// Hero Slider
 .hero-slider {
-    position: relative;
-    width: 100%;
     height: 600px;
     overflow: hidden;
-}
 
-.slider-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slides {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.slide-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #fff;
-    z-index: 2;
-}
-
-.slide-content h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.slide-content p {
-    font-size: 1.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
-    z-index: 3;
-}
-
-.slider-btn:hover {
-    background: #fff;
-}
-
-.slider-btn.prev {
-    left: 30px;
-}
-
-.slider-btn.next {
-    right: 30px;
-}
-
-.slider-dots {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 3;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.dot.active {
-    background: #fff;
-    width: 30px;
-    border-radius: 6px;
-}
-
-/* Programs Section */
-.programs-section {
-    padding: 60px 0;
-    background: #f8f9fa;
-}
-
-.programs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.program-card {
-    background: #fff;
-    padding: 40px 30px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-.program-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.program-icon {
-    margin-bottom: 20px;
-}
-
-.program-icon img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-}
-
-.program-card h3 {
-    font-size: 1.5rem;
-    color: #1a1a2e;
-    margin-bottom: 10px;
-}
-
-.program-card p {
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.btn-learn-more {
-    display: inline-block;
-    padding: 10px 30px;
-    background: #ff6b6b;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.btn-learn-more:hover {
-    background: #ff5252;
-}
-
-/* Admission Banner */
-.admission-banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 60px 0;
-    text-align: center;
-    color: #fff;
-}
-
-.admission-banner h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-}
-
-.btn-apply {
-    display: inline-block;
-    padding: 15px 40px;
-    background: #fff;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.btn-apply:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* About Section */
-.about-section {
-    padding: 60px 0;
-}
-
-.about-content {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.about-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 30px;
-}
-
-.btn-read-more {
-    display: inline-block;
-    padding: 12px 35px;
-    background: #1a1a2e;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.btn-read-more:hover {
-    background: #2a2a3e;
-}
-
-/* Vision, Mission, Values Section */
-.vmv-section {
-    padding: 60px 0;
-    background: #f8f9fa;
-}
-
-.vmv-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.vmv-card {
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.vmv-icon {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.vmv-icon img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-.vmv-card h3 {
-    font-size: 1.8rem;
-    color: #1a1a2e;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.vmv-card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.vmv-card ul li {
-    padding: 8px 0;
-    color: #555;
-    position: relative;
-    padding-left: 25px;
-}
-
-.vmv-card ul li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: #ff6b6b;
-    font-weight: bold;
-}
-
-.vmv-card p {
-    color: #555;
-    line-height: 1.8;
-}
-
-/* News Section */
-.news-section {
-    padding: 60px 0;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    color: #1a1a2e;
-}
-
-.btn-view-all {
-    padding: 10px 25px;
-    background: #ff6b6b;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 0.3s;
-}
-
-.btn-view-all:hover {
-    background: #ff5252;
-}
-
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.news-card {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.news-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.news-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.news-card:hover .news-image img {
-    transform: scale(1.1);
-}
-
-.news-content {
-    padding: 20px;
-}
-
-.news-date {
-    display: inline-block;
-    color: #ff6b6b;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.news-content h3 {
-    font-size: 1.2rem;
-    color: #1a1a2e;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.news-content p {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* Quick Links & Events Section */
-.links-events-section {
-    padding: 60px 0;
-    background: #f8f9fa;
-}
-
-.le-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
-}
-
-.quick-links h3,
-.events-section-side h3 {
-    font-size: 2rem;
-    color: #1a1a2e;
-    margin-bottom: 30px;
-}
-
-.links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.link-card {
-    background: #fff;
-    padding: 25px;
-    text-align: center;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #1a1a2e;
-    font-weight: 500;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-}
-
-.link-card:hover {
-    background: #ff6b6b;
-    color: #fff;
-    transform: translateY(-5px);
-}
-
-.events-list {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.event-card {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.event-card:last-child {
-    border-bottom: none;
-}
-
-.event-date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #ff6b6b;
-    color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    min-width: 80px;
-}
-
-.event-date .day {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.event-date .month {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.event-details h4 {
-    font-size: 1.1rem;
-    color: #1a1a2e;
-    margin-bottom: 5px;
-}
-
-.event-time {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-/* Benefits Section */
-.benefits-section {
-    padding: 60px 0;
-}
-
-.benefits-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
-}
-
-.tab-btn {
-    padding: 12px 30px;
-    background: #f8f9fa;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.tab-btn.active,
-.tab-btn:hover {
-    background: #ff6b6b;
-    color: #fff;
-}
-
-.benefits-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.benefits-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 15px;
-}
-
-.benefits-list li {
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 4px;
-    position: relative;
-    padding-left: 40px;
-}
-
-.benefits-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 15px;
-    color: #ff6b6b;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-/* Admission CTA Section */
-.admission-cta {
-    padding: 60px 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-}
-
-.cta-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.cta-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.cta-content h3 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-}
-
-.cta-image {
-    margin: 30px 0;
-}
-
-.cta-image img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cta-content h4 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-.cta-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 30px;
-}
-
-.btn-apply-now {
-    display: inline-block;
-    padding: 15px 40px;
-    background: #fff;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.btn-apply-now:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Container */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .le-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+        height: 400px;
     }
 
-    .benefits-list {
-        grid-template-columns: 1fr;
+    .slider-container {
+        height: 100%;
+        position: relative;
+    }
+
+    .slides {
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+        height: 600px;
+
+        @media (max-width: 768px) {
+            height: 400px;
+        }
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .slide-content {
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+            h1 {
+                animation: fadeInDown 0.8s ease-out;
+            }
+
+            p {
+                animation: fadeInUp 0.8s ease-out 0.3s both;
+            }
+        }
+    }
+
+    .slider-btn {
+        z-index: 3;
+        width: 50px;
+        height: 50px;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        &.prev {
+            margin-left: 20px;
+        }
+
+        &.next {
+            margin-right: 20px;
+        }
+
+        i {
+            font-size: 1.2rem;
+        }
+    }
+
+    .slider-dots {
+        z-index: 3;
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+
+            &.active,
+            &:hover {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+    }
+}
+
+// Programs Section
+.programs-section {
+    .program-card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+
+        &:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+
+            .program-icon i {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .program-icon i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+// Admission Banner
+.admission-banner {
+    background: linear-gradient(135deg, $primary-color 0%, #0a58ca 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    h2 {
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+// About Section
+.about-section {
+    .about-content {
+        p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// VMV Section
+.vmv-section {
+    .vmv-card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+
+            .vmv-icon i {
+                transform: scale(1.1) rotate(360deg);
+            }
+        }
+
+        .vmv-icon i {
+            transition: transform 0.6s ease;
+        }
+
+        ul {
+            li {
+                transition: all 0.2s ease;
+
+                &:hover {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}
+
+// News Section
+.news-section {
+    .news-card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+
+            .news-image img {
+                transform: scale(1.1);
+            }
+        }
+
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .btn-link {
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+
+            &:hover {
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+// Links & Events Section
+.links-events-section {
+    .card {
+        border-radius: 15px;
+
+        .btn-outline-primary {
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+            }
+        }
+
+        .event-date {
+            min-width: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .d-flex:hover {
+            .event-date {
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+
+// Benefits Section
+.benefits-section {
+    .nav-pills {
+        .nav-link {
+            border-radius: 25px;
+            padding: 10px 25px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+
+            &:not(.active) {
+                color: $primary-color;
+                background: white;
+                border-color: #dee2e6;
+
+                &:hover {
+                    background: rgba(13, 110, 253, 0.1);
+                    border-color: $primary-color;
+                }
+            }
+
+            &.active {
+                background: $primary-color;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    .list-unstyled li {
+        transition: all 0.2s ease;
+        padding: 5px;
+        border-radius: 5px;
+
+        &:hover {
+            background: rgba(13, 110, 253, 0.05);
+            transform: translateX(5px);
+        }
+    }
+}
+
+// Admission CTA
+.admission-cta {
+    background: linear-gradient(135deg, $primary-color 0%, #0a58ca 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .cta-image {
+        margin: 30px 0;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .btn {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+// Animations
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+    .programs-section .row {
+        gap: 1rem;
+    }
+
+    .links-events-section .le-grid {
+        gap: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .hero-slider {
-        height: 400px;
+    .display-3 {
+        font-size: 2rem !important;
     }
 
-    .slide-content h1 {
-        font-size: 2.5rem;
+    .display-5 {
+        font-size: 1.8rem !important;
     }
 
-    .slide-content p {
-        font-size: 1.2rem;
+    .display-6 {
+        font-size: 1.5rem !important;
     }
 
-    .admission-banner h2 {
-        font-size: 1.8rem;
+    .lead {
+        font-size: 1rem !important;
     }
 
-    .section-header {
-        flex-direction: column;
-        gap: 20px;
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+
+        &.prev {
+            margin-left: 10px;
+        }
+
+        &.next {
+            margin-right: 10px;
+        }
+
+        i {
+            font-size: 1rem;
+        }
     }
 
-    .news-grid {
-        grid-template-columns: 1fr;
+    .hero-slider .slide-content {
+        padding: 0 15px;
+
+        h1 {
+            font-size: 1.5rem !important;
+        }
+
+        p {
+            font-size: 1rem !important;
+        }
     }
 
-    .benefits-tabs {
+    .benefits-section .nav-pills {
         flex-wrap: wrap;
+
+        .nav-link {
+            margin: 5px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
     }
 
-    .cta-content h2 {
-        font-size: 1.8rem;
+    .admission-banner h2,
+    .admission-cta h2 {
+        font-size: 1.3rem !important;
     }
 
-    .cta-content h3 {
-        font-size: 1.5rem;
+    .btn-lg {
+        padding: 10px 20px !important;
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slider {
+        height: 300px;
+
+        .slide {
+            height: 300px;
+        }
+    }
+
+    .program-card,
+    .news-card,
+    .vmv-card {
+        margin-bottom: 1rem;
+    }
+
+    .event-date {
+        min-width: 60px;
+        padding: 10px !important;
+
+        .fw-bold {
+            font-size: 1.5rem !important;
+        }
+    }
+
+    .benefits-section .list-unstyled li {
+        font-size: 0.9rem;
+    }
+}
+
+// Utility Classes
+.text-justify {
+    text-align: justify;
+}
+
+.shadow-hover {
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
     }
 }

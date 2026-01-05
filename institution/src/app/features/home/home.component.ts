@@ -15,35 +15,66 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   slides = [
     {
-      image: 'assets/images/slider1.jpg',
+      image: 'assets/images/DSC01977-copy-scaled.jpg',
       title: 'Welcome to Nepal Western Academy',
-      subtitle: 'Excellence in Business Education'
+      // subtitle: 'Excellence in Business Education'
     },
     {
-      image: 'assets/images/slider2.jpg',
+      image: 'assets/images/DSC09282-scaled.jpg',
       title: 'Shape Your Future',
-      subtitle: 'Quality Education & Professional Development'
+      // subtitle: 'Quality Education & Professional Development'
     },
     {
-      image: 'assets/images/slider3.jpg',
+      image: 'assets/images/DSC02093-copy-scaled.jpg',
       title: 'Innovation & Leadership',
-      subtitle: 'Empowering Tomorrow\'s Leaders'
+      // subtitle: 'Empowering Tomorrow\'s Leaders'
+    },
+    {
+      image: 'assets/images/slide2.jpg',
+      title: 'NWA Campus Life',
+      // subtitle: 'Vibrant Community & Opportunities'
     }
   ];
 
   programs = [
-    { code: 'BBA', name: 'Bachelor of Business Administration', icon: 'bba' },
-    { code: 'BHM', name: 'Bachelor of Hotel Management', icon: 'bhm' },
-    { code: 'BBA Finance', name: 'BBA in Finance', icon: 'bba-finance' }
+    {
+      code: 'BBA',
+      name: 'Bachelor of Business Administration',
+      icon: 'bba'
+    },
+    {
+      code: 'BHM',
+      name: 'Bachelor of Hotel Management',
+      icon: 'bhm'
+    },
+    {
+      code: 'BBA Finance',
+      name: 'BBA in Finance',
+      icon: 'bba-finance'
+    }
   ];
 
   latestNews = [
     {
       id: 1,
       title: 'Admission Open for 2025',
-      excerpt: 'Nepal Western Academy announces admission for BBA, BHM, and BBA Finance programs.',
+      excerpt: 'Nepal Western Academy announces admission for BBA, BHM, and BBA Finance programs for the 2025 intake. Join us to shape your future.',
       date: new Date('2025-01-15'),
       image: 'assets/images/news1.jpg'
+    },
+    {
+      id: 2,
+      title: 'Industrial Visit to Leading Hotels',
+      excerpt: 'BHM students visited top hotels in Kathmandu to gain practical insights into hotel management and operations.',
+      date: new Date('2025-01-10'),
+      image: 'assets/images/news2.jpg'
+    },
+    {
+      id: 3,
+      title: 'Guest Lecture on Banking Sector',
+      excerpt: 'Distinguished banker shares insights on modern banking practices and career opportunities in the financial sector.',
+      date: new Date('2025-01-05'),
+      image: 'assets/images/news3.jpg'
     }
   ];
 
@@ -57,6 +88,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       title: 'Career Fair',
       date: new Date('2025-02-20'),
       time: '9:00 AM'
+    },
+    {
+      title: 'Guest Lecture Series',
+      date: new Date('2025-03-05'),
+      time: '2:00 PM'
+    },
+    {
+      title: 'Industrial Visit',
+      date: new Date('2025-03-15'),
+      time: '8:00 AM'
     }
   ];
 
@@ -88,6 +129,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number) {
     this.currentSlide = index;
+
+    // Reset interval when manually changing slides
+    if (isPlatformBrowser(this.platformId) && this.slideInterval) {
+      clearInterval(this.slideInterval);
+      this.slideInterval = setInterval(() => {
+        this.nextSlide();
+      }, 5000);
+    }
   }
 
   formatDate(date: Date): string {
@@ -100,7 +149,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getMonthDay(date: Date) {
     return {
-      day: date.getDate().toString(),
+      day: date.getDate().toString().padStart(2, '0'),
       month: date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
     };
   }

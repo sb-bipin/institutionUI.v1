@@ -1,153 +1,215 @@
 <div class="container-fluid m-0 p-0">
-
     <div class="dashboard-home">
         <!-- Hero Slider Section -->
-        <section class="hero-slider">
+        <section class="hero-slider position-relative">
             <div class="slider-container">
-                <div class="slides" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
-                    <div class="slide" *ngFor="let slide of slides">
-                        <img [src]="slide.image" [alt]="slide.title" />
-                        <div class="slide-content">
-                            <h1>{{ slide.title }}</h1>
-                            <p>{{ slide.subtitle }}</p>
+                <div class="slides d-flex" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+                    <div class="slide flex-shrink-0 w-100 position-relative" *ngFor="let slide of slides">
+                        <img [src]="slide.image" [alt]="slide.title" class="w-100" />
+                        <div
+                            class="slide-content position-absolute bottom-0 start-50 translate-middle text-center text-white">
+                            <h1 class="display-3 fw-bold mb-3">{{ slide.title }}</h1>
+                            <!-- <p class="lead fs-4">{{ slide.subtitle }}</p> -->
                         </div>
                     </div>
                 </div>
 
-                <button class="slider-btn prev" (click)="prevSlide()">
-                    <i class="arrow-left"></i>
+                <button
+                    class="slider-btn prev position-absolute top-50 start-0 translate-middle-y btn btn-light rounded-circle"
+                    (click)="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
                 </button>
-                <button class="slider-btn next" (click)="nextSlide()">
-                    <i class="arrow-right"></i>
+                <button
+                    class="slider-btn next position-absolute top-50 end-0 translate-middle-y btn btn-light rounded-circle"
+                    (click)="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
                 </button>
 
-                <div class="slider-dots">
-                    <span *ngFor="let slide of slides; let i = index" class="dot" [class.active]="i === currentSlide"
-                        (click)="goToSlide(i)">
+                <div class="slider-dots position-absolute bottom-0 start-50 translate-middle-x d-flex gap-2 pb-4">
+                    <span *ngFor="let slide of slides; let i = index" class="dot rounded-circle bg-white"
+                        [class.active]="i === currentSlide" (click)="goToSlide(i)">
                     </span>
                 </div>
             </div>
         </section>
 
         <!-- Programs Section -->
-        <section class="programs-section">
+        <section class="programs-section py-5 bg-light">
             <div class="container">
-                <div class="programs-grid">
-                    <div class="program-card" *ngFor="let program of programs">
-                        <div class="program-icon">
-                            <img [src]="'assets/icons/' + program.icon + '.png'" [alt]="program.name" />
+                <div class="row text-center mb-4">
+                    <div class="col">
+                        <h2 class="display-5 fw-bold text-primary">Our Programs</h2>
+                        <p class="lead text-muted">Choose Your Path to Success</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let program of programs">
+                        <div class="card program-card h-100 shadow-sm border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="program-icon mb-3">
+                                    <i class="fas fa-graduation-cap fa-4x text-primary"></i>
+                                </div>
+                                <h3 class="card-title h4 fw-bold">{{ program.code }}</h3>
+                                <p class="card-text text-muted">{{ program.name }}</p>
+                                <a [routerLink]="['/programs', program.code.toLowerCase()]"
+                                    class="btn btn-outline-primary mt-3">
+                                    Learn More <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
                         </div>
-                        <h3>{{ program.code }}</h3>
-                        <p>{{ program.name }}</p>
-                        <a [routerLink]="['/programs', program.code.toLowerCase()]" class="btn-learn-more">
-                            Learn More
-                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Admission Banner -->
-        <section class="admission-banner">
-            <div class="container">
-                <h2>Admission Open for BBA, BHM and BBA (Finance) 2025 Intake</h2>
-                <a routerLink="/admission" class="btn-apply">Apply Now</a>
+        <section class="admission-banner bg-primary text-white py-5">
+            <div class="container text-center">
+                <h2 class="display-6 fw-bold mb-3">
+                    <i class="fas fa-bell me-2"></i>
+                    Admission Open for BBA, BHM and BBA (Finance) 2025 Intake
+                </h2>
+                <a routerLink="/admission" class="btn btn-light btn-lg px-5">
+                    Apply Now <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </section>
 
         <!-- About Section -->
-        <section class="about-section">
+        <section class="about-section py-5">
             <div class="container">
-                <div class="about-content">
-                    <p>
-                        The success of any nation depends on the youth and the quality of
-                        education they gained. Today's world is totally dominated by innovation,
-                        creativity and entrepreneurship. So it is important to orient young minds
-                        in understanding innovative learning practices to capture the new elements
-                        of dice. We understand knowledge and its application is the only way, by
-                        which this can be achieved. Nepal Western Academy (NWA) takes an Innovative
-                        approach, providing access to international standard education.
-                    </p>
-                    <a routerLink="/about/director" class="btn-read-more">Read More</a>
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="text-center mb-4">
+                            <h2 class="display-5 fw-bold text-primary">About Nepal Western Academy</h2>
+                        </div>
+                        <div class="about-content">
+                            <p class="lead text-muted text-justify">
+                                The success of any nation depends on the youth and the quality of
+                                education they gained. Today's world is totally dominated by innovation,
+                                creativity and entrepreneurship. So it is important to orient young minds
+                                in understanding innovative learning practices to capture the new elements
+                                of dice. We understand knowledge and its application is the only way, by
+                                which this can be achieved. Nepal Western Academy (NWA) takes an Innovative
+                                approach, providing access to international standard education.
+                            </p>
+                            <div class="text-center mt-4">
+                                <a routerLink="/about" class="btn btn-primary btn-lg">
+                                    Read More <i class="fas fa-book-open ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Vision, Mission, Values Section -->
-        <section class="vmv-section">
+        <section class="vmv-section py-5 bg-light">
             <div class="container">
-                <div class="vmv-grid">
-                    <div class="vmv-card">
-                        <div class="vmv-icon">
-                            <img src="assets/icons/values.png" alt="Our Values" />
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card vmv-card h-100 shadow border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="vmv-icon mb-3">
+                                    <i class="fas fa-star fa-3x text-warning"></i>
+                                </div>
+                                <h3 class="card-title h4 fw-bold text-primary">Our Values</h3>
+                                <ul class="list-unstyled text-start mt-3">
+                                    <li class="mb-2"><i
+                                            class="fas fa-check-circle text-success me-2"></i>Student-centered</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Excellence
+                                    </li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Innovation
+                                    </li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Integrity</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Socially
+                                        responsible</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Creativity
+                                    </li>
+                                    <li class="mb-2"><i
+                                            class="fas fa-check-circle text-success me-2"></i>Professionalism</li>
+                                </ul>
+                            </div>
                         </div>
-                        <h3>Our Values</h3>
-                        <ul>
-                            <li>Student-centered</li>
-                            <li>Excellence</li>
-                            <li>Innovation</li>
-                            <li>Integrity</li>
-                            <li>Socially responsible</li>
-                            <li>Creativity</li>
-                            <li>Professionalism</li>
-                        </ul>
                     </div>
 
-                    <div class="vmv-card">
-                        <div class="vmv-icon">
-                            <img src="assets/icons/vision.png" alt="Our Vision" />
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card vmv-card h-100 shadow border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="vmv-icon mb-3">
+                                    <i class="fas fa-eye fa-3x text-info"></i>
+                                </div>
+                                <h3 class="card-title h4 fw-bold text-primary">Our Vision</h3>
+                                <p class="text-muted text-justify mt-3">
+                                    Our vision is to be an excellence business school recognized nationally
+                                    and internationally for developing a competent professional who are
+                                    committed to excellence in every dimension and to be a transformational
+                                    leader in business thought and education through knowledge creation,
+                                    innovative programs, and extraordinary experiences.
+                                </p>
+                            </div>
                         </div>
-                        <h3>Our Vision</h3>
-                        <p>
-                            Our vision is to be an excellence business school recognized nationally
-                            and internationally for developing a competent professional who are
-                            committed to excellence in every dimension and to be a transformational
-                            leader in business thought and education through knowledge creation,
-                            innovative programs, and extraordinary experiences.
-                        </p>
                     </div>
 
-                    <div class="vmv-card">
-                        <div class="vmv-icon">
-                            <img src="assets/icons/mission.png" alt="Our Mission" />
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card vmv-card h-100 shadow border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="vmv-icon mb-3">
+                                    <i class="fas fa-bullseye fa-3x text-danger"></i>
+                                </div>
+                                <h3 class="card-title h4 fw-bold text-primary">Our Mission</h3>
+                                <ul class="list-unstyled text-start mt-3">
+                                    <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>To develop the
+                                        platform for learning and exploring every aspect
+                                        of individual knowledge and experience.</li>
+                                    <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>To create
+                                        environment for enhancing professionalism, humanism and
+                                        social responsibility through quality education.</li>
+                                    <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>To develop
+                                        enthusiastic and self-motivated graduates.</li>
+                                    <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>To promote
+                                        education that would be liberal and progressive which
+                                        contributes to the new dimensions of the educator.</li>
+                                    <li class="mb-2"><i class="fas fa-arrow-right text-primary me-2"></i>To provide
+                                        students with the right combination of academic excellence
+                                        and practical hands-on experience to take them higher achievements.</li>
+                                </ul>
+                            </div>
                         </div>
-                        <h3>Our Mission</h3>
-                        <ul>
-                            <li>To develop the platform for learning and exploring every aspect
-                                of individual knowledge and experience.</li>
-                            <li>To create environment for enhancing professionalism, humanism and
-                                social responsibility through quality education.</li>
-                            <li>To develop enthusiastic and self-motivated graduates.</li>
-                            <li>To promote education that would be liberal and progressive which
-                                contributes to the new dimensions of the educator.</li>
-                            <li>To provide students with the right combination of academic excellence
-                                and practical hands-on experience to take them higher achievements.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- News & Updates Section -->
-        <section class="news-section">
+        <section class="news-section py-5">
             <div class="container">
-                <div class="section-header">
-                    <h2>News & Updates</h2>
-                    <a routerLink="/news" class="btn-view-all">View All News</a>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="display-6 fw-bold text-primary">
+                        <i class="fas fa-newspaper me-2"></i>News & Updates
+                    </h2>
+                    <a routerLink="/news" class="btn btn-outline-primary">
+                        View All News <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
                 </div>
 
-                <div class="news-grid">
-                    <div class="news-card" *ngFor="let newsItem of latestNews">
-                        <div class="news-image" *ngIf="newsItem.image">
-                            <img [src]="newsItem.image" [alt]="newsItem.title" />
-                        </div>
-                        <div class="news-content">
-                            <span class="news-date">{{ formatDate(newsItem.date) }}</span>
-                            <h3>{{ newsItem.title }}</h3>
-                            <p>{{ newsItem.excerpt }}</p>
-                            <a [routerLink]="['/news', newsItem.id]" class="btn-read-more">
-                                Read More
-                            </a>
+                <div class="row g-4">
+                    <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let newsItem of latestNews">
+                        <div class="card news-card h-100 shadow-sm border-0">
+                            <div class="news-image" *ngIf="newsItem.image">
+                                <img [src]="newsItem.image" [alt]="newsItem.title" class="card-img-top" />
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">
+                                    <i class="far fa-calendar-alt me-1"></i>{{ formatDate(newsItem.date) }}
+                                </span>
+                                <h3 class="card-title h5 fw-bold">{{ newsItem.title }}</h3>
+                                <p class="card-text text-muted">{{ newsItem.excerpt }}</p>
+                                <a [routerLink]="['/news', newsItem.id]" class="btn btn-link text-primary p-0">
+                                    Read More <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,92 +217,210 @@
         </section>
 
         <!-- Quick Links & Events Section -->
-        <section class="links-events-section">
+        <section class="links-events-section py-5 bg-light">
             <div class="container">
-                <div class="le-grid">
+                <div class="row g-4">
                     <!-- Quick Links -->
-                    <div class="quick-links">
-                        <h3>Quick Links</h3>
-                        <div class="links-grid">
-                            <a routerLink="/news" class="link-card">News</a>
-                            <a routerLink="/events" class="link-card">Events</a>
-                            <a routerLink="/about/facilities" class="link-card">Facilities and Support</a>
-                            <a routerLink="/about/management" class="link-card">Management Profile</a>
-                            <a routerLink="/about/director" class="link-card">Director Message</a>
-                            <a routerLink="/admission" class="link-card">Admission</a>
+                    <div class="col-lg-6">
+                        <div class="card h-100 shadow border-0">
+                            <div class="card-body p-4">
+                                <h3 class="card-title h4 fw-bold text-primary mb-4">
+                                    <i class="fas fa-link me-2"></i>Quick Links
+                                </h3>
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <a routerLink="/news" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-newspaper me-2"></i>News
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a routerLink="/events" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-calendar-alt me-2"></i>Events
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a routerLink="/about/facilities" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-building me-2"></i>Facilities
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a routerLink="/about/management" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-users me-2"></i>Management
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a routerLink="/about/director" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-user-tie me-2"></i>Director
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a routerLink="/admission" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-file-alt me-2"></i>Admission
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Events -->
-                    <div class="events-section-side">
-                        <h3>Events</h3>
-                        <div class="events-list">
-                            <div class="event-card" *ngFor="let event of upcomingEvents">
-                                <div class="event-date">
-                                    <span class="day">{{ getMonthDay(event.date).day }}</span>
-                                    <span class="month">{{ getMonthDay(event.date).month }}</span>
+                    <div class="col-lg-6">
+                        <div class="card h-100 shadow border-0">
+                            <div class="card-body p-4">
+                                <h3 class="card-title h4 fw-bold text-primary mb-4">
+                                    <i class="fas fa-calendar-check me-2"></i>Upcoming Events
+                                </h3>
+                                <div class="events-list">
+                                    <div class="d-flex align-items-center mb-3 p-3 bg-light rounded"
+                                        *ngFor="let event of upcomingEvents">
+                                        <div class="event-date bg-primary text-white rounded text-center p-3 me-3">
+                                            <div class="fw-bold fs-3">{{ getMonthDay(event.date).day }}</div>
+                                            <div class="small">{{ getMonthDay(event.date).month }}</div>
+                                        </div>
+                                        <div class="event-details flex-grow-1">
+                                            <h4 class="h6 fw-bold mb-1">{{ event.title }}</h4>
+                                            <p class="text-muted mb-0 small">
+                                                <i class="far fa-clock me-1"></i>{{ event.time }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="event-details">
-                                    <h4>{{ event.title }}</h4>
-                                    <p class="event-time">{{ event.time }}</p>
+                                <div class="text-center mt-3">
+                                    <a routerLink="/events" class="btn btn-primary">
+                                        View All Events <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <a routerLink="/events" class="btn-view-all">View All Events</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Benefits/Features Section -->
-        <section class="benefits-section">
+        <!-- Benefits Section -->
+        <section class="benefits-section py-5">
             <div class="container">
-                <div class="benefits-tabs">
-                    <button class="tab-btn active">Benefits</button>
-                    <button class="tab-btn">Self Development</button>
-                    <button class="tab-btn">Spirituality</button>
-                    <button class="tab-btn">Alumni</button>
+                <div class="text-center mb-4">
+                    <h2 class="display-6 fw-bold text-primary">Why Choose NWA?</h2>
                 </div>
 
-                <div class="benefits-content">
-                    <ul class="benefits-list">
-                        <li>Well facilitated office building</li>
-                        <li>To get advance methodology of teaching</li>
-                        <li>Learning through case study</li>
-                        <li>Project work based learning</li>
-                        <li>Frequently industrial visit</li>
-                        <li>Guest lecturing from industrial expert</li>
-                        <li>On the job training available</li>
-                        <li>Air conditioning class room</li>
-                        <li>Focus on extracurricular activities for personal development</li>
-                        <li>Sufficient computer lab with Hi-speed internet</li>
-                        <li>Sufficient library with study lounge</li>
-                    </ul>
+                <ul class="nav nav-pills justify-content-center mb-4" id="benefitsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#benefits" type="button">
+                            <i class="fas fa-medal me-2"></i>Benefits
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#development" type="button">
+                            <i class="fas fa-user-graduate me-2"></i>Self Development
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#spirituality" type="button">
+                            <i class="fas fa-hands-helping me-2"></i>Spirituality
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#alumni" type="button">
+                            <i class="fas fa-users me-2"></i>Alumni
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="benefits">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>Well
+                                                facilitated office building</li>
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>To get
+                                                advance methodology of teaching</li>
+                                            <li class="mb-3"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Learning through
+                                                case study</li>
+                                            <li class="mb-3"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Project work based
+                                                learning</li>
+                                            <li class="mb-3"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Frequently
+                                                industrial visit</li>
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>Guest
+                                                lecturing from industrial expert</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled">
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>On the
+                                                job training available</li>
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>Air
+                                                conditioning class room</li>
+                                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>Focus
+                                                on extracurricular activities for personal development</li>
+                                            <li class="mb-3"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Sufficient
+                                                computer lab with Hi-speed internet</li>
+                                            <li class="mb-3"><i
+                                                    class="fas fa-check-circle text-success me-2"></i>Sufficient library
+                                                with study lounge</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="development">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4 text-center">
+                                <p class="lead">Self Development content goes here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="spirituality">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4 text-center">
+                                <p class="lead">Spirituality content goes here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="alumni">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body p-4 text-center">
+                                <p class="lead">Alumni content goes here</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Admission CTA Section -->
-        <section class="admission-cta">
+        <!-- <section class="admission-cta py-5 bg-primary text-white">
             <div class="container">
-                <div class="cta-content">
-                    <h2>Admission Open In BBA (Finance), BHM and BBA</h2>
-                    <h3>Apply for BBA, BHM and BBA (Finance)</h3>
-                    <div class="cta-image">
-                        <img src="assets/images/admission-open.jpg" alt="Admission Open" />
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Admission Open In BBA (Finance), BHM and BBA</h2>
+                        <h3 class="h4 mb-4">Apply for BBA, BHM and BBA (Finance)</h3>
+                        <div class="cta-image mb-4">
+                            <img src="assets/images/DSC02093-copy-scaled.jpg" alt="Admission Open"
+                                class="img-fluid rounded shadow" />
+                        </div>
+                        <h4 class="h5 mb-3">Admission Open for 2025 Intake</h4>
+                        <p class="lead mb-4">
+                            Nepal Western Academy is a center of academic excellence dedicated to
+                            nurturing minds and shaping futures. With a commitment to quality education,
+                            discipline, and innovation, it empowers students with knowledge, values,
+                            and skills for global success. The academy inspires confidence, leadership,
+                            and lifelong learning in every learner.
+                        </p>
+                        <a routerLink="/admission" class="btn btn-light btn-lg px-5">
+                            Read More <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
-                    <h4>Admission Open for 2025 Intake</h4>
-                    <p>
-                        Nepal Western Academy is a center of academic excellence dedicated to
-                        nurturing minds and shaping futures. With a commitment to quality education,
-                        discipline, and innovation, it empowers students with knowledge, values,
-                        and skills for global success. The academy inspires confidence, leadership,
-                        and lifelong learning in every learner.
-                    </p>
-                    <a routerLink="/admission" class="btn-apply-now">Read More</a>
                 </div>
             </div>
-        </section>
+        </section> -->
     </div>
-
 </div>

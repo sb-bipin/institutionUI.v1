@@ -20,7 +20,7 @@ export const routes: Routes = [
                         .then(m => m.AboutSectionComponent)
             },
             {
-                path: 'director-message',
+                path: 'messages-from-leaders',
                 loadComponent: () =>
                     import('./features/director-message/director-message.component')
                         .then(m => m.DirectorMessageComponent)

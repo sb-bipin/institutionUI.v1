@@ -1,4 +1,4 @@
-.director-section {
+.directors-section {
     background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
     min-height: 100vh;
 }
@@ -6,8 +6,25 @@
 .bg-pattern {
     background-image:
         radial-gradient(circle at 20% 50%, rgba(0, 123, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(25, 135, 84, 0.05) 0%, transparent 50%);
     z-index: 0;
+}
+
+.badge-animated {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 .animate-fade-in {
@@ -26,6 +43,67 @@
     }
 }
 
+.director-tabs {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.director-tab-btn {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    border: 2px solid transparent;
+}
+
+.director-tab-btn:not(.active) {
+    background: #f8f9fa;
+}
+
+.director-tab-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: #041f68;
+}
+
+.director-tab-btn.active {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(90, 55, 55, 0.15);
+}
+
+.tab-icon {
+    transition: all 0.3s ease;
+}
+
+.director-tab-btn.active .tab-icon {
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.director-content {
+    animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .director-card {
     transition: all 0.4s ease;
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -39,8 +117,8 @@
 .corner-decoration {
     width: 100px;
     height: 100px;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, transparent 100%);
     border-radius: 0 0 0 100%;
+    opacity: 0.3;
 }
 
 .profile-wrapper {
@@ -62,12 +140,20 @@
 .glow-circle {
     width: 220px;
     height: 220px;
-    background: radial-gradient(circle, rgba(0, 123, 255, 0.3) 0%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     animation: pulse 2s ease-in-out infinite;
     z-index: 1;
+    border-radius: 50%;
+}
+
+.glow-primary {
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.3) 0%, transparent 70%);
+}
+
+.glow-success {
+    background: radial-gradient(circle, rgba(25, 135, 84, 0.3) 0%, transparent 70%);
 }
 
 @keyframes pulse {
@@ -88,6 +174,10 @@
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
 }
 
+.bg-gradient-success {
+    background: linear-gradient(135deg, #198754 0%, #0d6832 100%);
+}
+
 .status-badge {
     animation: scaleIn 0.5s ease-out 0.5s both;
 }
@@ -102,37 +192,50 @@
     }
 }
 
-.feature-card {
+.contact-btn {
     transition: all 0.3s ease;
-    border-left: 4px solid transparent !important;
 }
 
-.feature-card:hover {
-    transform: translateX(10px);
-    border-left-color: #007bff !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+.contact-btn:hover {
+    transform: translateY(-5px) scale(1.1);
 }
 
-.intro-box {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    animation: slideInLeft 0.8s ease-out;
+.message-card {
+    transition: all 0.3s ease;
+    animation: fadeInScale 0.5s ease-out both;
 }
 
-@keyframes slideInLeft {
+@keyframes fadeInScale {
     from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: scale(0.9);
     }
 
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: scale(1);
     }
 }
 
-.congratulations-banner {
-    background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
-    position: relative;
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.message-icon {
+    transition: all 0.3s ease;
+}
+
+.message-card:hover .message-icon {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.banner-primary {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.banner-success {
+    background: linear-gradient(135deg, #d5f4e6 0%, #b7dfcc 100%);
 }
 
 .confetti::before,
@@ -159,30 +262,33 @@
     0%,
     100% {
         opacity: 0;
-        transform: scale(0);
+        transform: scale(0) rotate(0deg);
     }
 
     50% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) rotate(180deg);
     }
 }
 
-.stat-card {
+.bg-gradient-dark {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.stat-item {
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
-.stat-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+.stat-item:hover {
+    transform: scale(1.1);
 }
 
-.stat-card i {
+.stat-item i {
     transition: all 0.3s ease;
 }
 
-.stat-card:hover i {
+.stat-item:hover i {
     transform: rotateY(360deg);
 }
 
@@ -192,7 +298,11 @@
         font-size: 2.5rem;
     }
 
-    .intro-box h4 {
-        font-size: 1.25rem;
+    .director-tab-btn {
+        font-size: 0.9rem;
+    }
+
+    .profile-wrapper {
+        margin-bottom: 2rem;
     }
 }

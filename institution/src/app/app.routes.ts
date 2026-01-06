@@ -20,6 +20,12 @@ export const routes: Routes = [
                         .then(m => m.AboutSectionComponent)
             },
             {
+                path: 'director-message',
+                loadComponent: () =>
+                    import('./features/director-message/director-message.component')
+                        .then(m => m.DirectorMessageComponent)
+            },
+            {
                 path: 'programs',
                 loadComponent: () =>
                     import('./features/programs/programs.component')

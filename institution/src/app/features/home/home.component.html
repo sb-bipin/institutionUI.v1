@@ -1,6 +1,5 @@
 <div class="container-fluid m-0 p-0">
     <div class="dashboard-home">
-        <!-- Hero Slider Section -->
         <section class="hero-slider position-relative">
             <div class="slider-container">
                 <div class="slides d-flex" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
@@ -33,7 +32,6 @@
             </div>
         </section>
 
-        <!-- Programs Section -->
         <section class="programs-section py-5 bg-light">
             <div class="container">
                 <div class="row text-center mb-4">
@@ -51,8 +49,7 @@
                                 </div>
                                 <h3 class="card-title h4 fw-bold">{{ program.code }}</h3>
                                 <p class="card-text text-muted">{{ program.name }}</p>
-                                <a [routerLink]="['/programs', program.code.toLowerCase()]"
-                                    class="btn btn-outline-primary mt-3">
+                                <a [routerLink]="['/programs', program.icon]" class="btn btn-outline-primary mt-3">
                                     Learn More <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                             </div>
@@ -62,7 +59,6 @@
             </div>
         </section>
 
-        <!-- Admission Banner -->
         <section class="admission-banner bg-primary text-white py-5">
             <div class="container text-center">
                 <h2 class="display-6 fw-bold mb-3">
@@ -75,7 +71,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section class="about-section py-5">
             <div class="container">
                 <div class="row">
@@ -104,7 +99,6 @@
             </div>
         </section>
 
-        <!-- Vision, Mission, Values Section -->
         <section class="vmv-section py-5 bg-light">
             <div class="container">
                 <div class="row g-4">
@@ -182,7 +176,6 @@
             </div>
         </section>
 
-        <!-- News & Updates Section -->
         <section class="news-section py-5">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -216,7 +209,6 @@
             </div>
         </section>
 
-        <!-- Quick Links & Events Section -->
         <section class="links-events-section py-5 bg-light">
             <div class="container">
                 <div class="row g-4">
@@ -263,7 +255,6 @@
                         </div>
                     </div>
 
-                    <!-- Events -->
                     <div class="col-lg-6">
                         <div class="card h-100 shadow border-0">
                             <div class="card-body p-4">
@@ -297,7 +288,6 @@
             </div>
         </section>
 
-        <!-- Benefits Section -->
         <section class="benefits-section py-5">
             <div class="container">
                 <div class="text-center mb-4">
@@ -396,31 +386,5 @@
             </div>
         </section>
 
-        <!-- Admission CTA Section -->
-        <!-- <section class="admission-cta py-5 bg-primary text-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="display-5 fw-bold mb-3">Admission Open In BBA (Finance), BHM and BBA</h2>
-                        <h3 class="h4 mb-4">Apply for BBA, BHM and BBA (Finance)</h3>
-                        <div class="cta-image mb-4">
-                            <img src="assets/images/DSC02093-copy-scaled.jpg" alt="Admission Open"
-                                class="img-fluid rounded shadow" />
-                        </div>
-                        <h4 class="h5 mb-3">Admission Open for 2025 Intake</h4>
-                        <p class="lead mb-4">
-                            Nepal Western Academy is a center of academic excellence dedicated to
-                            nurturing minds and shaping futures. With a commitment to quality education,
-                            discipline, and innovation, it empowers students with knowledge, values,
-                            and skills for global success. The academy inspires confidence, leadership,
-                            and lifelong learning in every learner.
-                        </p>
-                        <a routerLink="/admission" class="btn btn-light btn-lg px-5">
-                            Read More <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section> -->
     </div>
 </div>

@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       code: 'BBA Finance',
       name: 'BBA in Finance',
-      icon: 'bba-finance'
+      icon: 'bba-f'
     }
   ];
 

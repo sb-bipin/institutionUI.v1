@@ -32,6 +32,24 @@ export const routes: Routes = [
                         .then(m => m.ProgramsComponent)
             },
             {
+                path: 'programs/bba',
+                loadComponent: () =>
+                    import('./features/programs/bba/bba.component')
+                        .then(m => m.BbaComponent)
+            },
+            {
+                path: 'programs/bhm',
+                loadComponent: () =>
+                    import('./features/programs/bhm/bhm.component')
+                        .then(m => m.BhmComponent)
+            },
+            {
+                path: 'programs/bba-f',
+                loadComponent: () =>
+                    import('./features/programs/bba-f/bba-f.component')
+                        .then(m => m.BbaFComponent)
+            },
+            {
                 path: 'admission',
                 loadComponent: () =>
                     import('./features/admission/admission.component')

@@ -1,0 +1,386 @@
+.curriculum-section {
+    background: #f8f9fa;
+}
+
+.semester-card {
+    transition: all 0.3s ease;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.semester-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+ul li {
+    font-size: 15px;
+}
+
+.btn-outline-primary {
+    font-weight: 600;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    min-height: 65vh;
+}
+
+.hero-background {
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.hero-title {
+    animation: slideInLeft 0.8s ease-out;
+    text-shadow: 2px 2px 18px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.info-badge {
+    animation: fadeInUp 0.8s ease-out;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.info-badge:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.illustration-circle {
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    animation: float 3s ease-in-out infinite;
+    border: 20px solid rgba(255, 255, 255, 0.2);
+}
+
+.illustration-circle i {
+    font-size: 150px;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.wave-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave-divider svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 60px;
+}
+
+.highlight-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.highlight-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.feature-card {
+    transition: all 0.4s ease;
+    animation: fadeInScale 0.6s ease-out both;
+    border-left: 4px solid transparent;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.feature-card:nth-child(1) {
+    border-left-color: #0d6efd;
+}
+
+.feature-card:nth-child(2) {
+    border-left-color: #198754;
+}
+
+.feature-card:nth-child(3) {
+    border-left-color: #0dcaf0;
+}
+
+.feature-card:nth-child(4) {
+    border-left-color: #dc3545;
+}
+
+.feature-icon {
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.semester-card {
+    transition: all 0.4s ease;
+    animation: slideInUp 0.6s ease-out both;
+    overflow: hidden;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.semester-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.semester-card .card-header {
+    transition: all 0.3s ease;
+}
+
+.semester-card:hover .card-header {
+    transform: scaleX(1.02);
+}
+
+.semester-card ul li {
+    transition: all 0.3s ease;
+    padding: 5px 0;
+}
+
+.semester-card ul li:hover {
+    transform: translateX(10px);
+    color: #dc3545 !important;
+}
+
+.eligibility-illustration {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.requirement-item {
+    animation: fadeInRight 0.6s ease-out both;
+}
+
+.requirement-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.requirement-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.requirement-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.requirement-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.requirement-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.requirement-number {
+    transition: all 0.3s ease;
+}
+
+.requirement-item:hover .requirement-number {
+    transform: scale(1.2);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.career-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff9e6 100%);
+}
+
+.career-pattern {
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(255, 193, 7, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 193, 7, 0.08) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.career-card {
+    transition: all 0.4s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+    cursor: pointer;
+    border-left: 4px solid transparent;
+}
+
+.career-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(255, 193, 7, 0.2) !important;
+    border-left-color: #ffc107;
+}
+
+.career-icon {
+    transition: all 0.4s ease;
+}
+
+.career-card:hover .career-icon {
+    transform: scale(1.15) rotate(5deg);
+    background-color: rgba(255, 193, 7, 0.2) !important;
+}
+
+.career-card:hover .career-icon i {
+    transform: scale(1.1);
+}
+
+.accordion-button {
+    transition: all 0.3s ease;
+    border-radius: 10px !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+    box-shadow: none;
+}
+
+.accordion-button:hover {
+    background-color: #f8f9fa;
+}
+
+.accordion-item {
+    border-radius: 10px !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (max-width: 992px) {
+    .display-2 {
+        font-size: 3rem;
+    }
+
+    .display-5 {
+        font-size: 2rem;
+    }
+
+    .illustration-circle {
+        width: 300px;
+        height: 300px;
+    }
+
+    .illustration-circle i {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 60vh;
+    }
+
+    .display-2 {
+        font-size: 2.5rem;
+    }
+
+    .info-badge {
+        font-size: 0.9rem;
+    }
+
+    .wave-divider svg {
+        height: 40px;
+    }
+}

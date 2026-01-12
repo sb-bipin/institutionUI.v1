@@ -50,6 +50,12 @@ export const routes: Routes = [
                         .then(m => m.BbaFComponent)
             },
             {
+                path: 'notice',
+                loadComponent: () =>
+                    import('./features/notice/notice.component')
+                        .then(m => m.NoticeComponent)
+            },
+            {
                 path: 'admission',
                 loadComponent: () =>
                     import('./features/admission/admission.component')

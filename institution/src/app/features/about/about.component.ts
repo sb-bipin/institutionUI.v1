@@ -218,7 +218,7 @@ import { RouterModule } from '@angular/router';
                   </div>
                   <h3 class="h4 mb-3">BBA - Finance</h3>
                   <p class="text-muted mb-3">Banking & Insurance Specialization</p>
-                  <a routerLink="/programs/bba-finance" class="btn btn-outline-danger">
+                  <a routerLink="/programs/bba-f" class="btn btn-outline-danger">
                     Learn More <i class="fas fa-arrow-right ms-2"></i>
                   </a>
                 </div>

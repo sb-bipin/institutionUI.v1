@@ -1,0 +1,140 @@
+.event-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+}
+
+.event-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.date-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 6px 10px;
+    text-align: center;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.date-badge .month {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.date-badge .day {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.event-body {
+    padding: 1rem;
+}
+
+.event-title {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+.event-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+.event-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+    font-size: 0.85rem;
+}
+
+.event-meta li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: #495057;
+}
+
+.event-meta i {
+    color: #0d6efd;
+}
+
+.soon-badge {
+    background: #fff3cd;
+    color: #856404;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .event-image {
+        height: 180px;
+    }
+
+    .section-header {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .event-image {
+        height: 160px;
+    }
+}
+
+.section-header {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+}
+
+.section-subtitle {
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.section-header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    border-radius: 2px;
+    margin: 0.75rem auto 0;
+}

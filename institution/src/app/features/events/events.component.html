@@ -1,1 +1,84 @@
-<p>events works!</p>
+<div class="events-page container py-2">
+
+    <div class="section-header text-center mb-4">
+        <h2 class="section-title">📅 Campus Events</h2>
+        <p class="section-subtitle">
+            Discover upcoming workshops, seminars, conferences, and more
+        </p>
+    </div>
+
+
+    <div class="d-flex justify-content-center mb-3 gap-2 flex-wrap">
+
+        <button class="btn" [ngClass]="selectedView === 'all' ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="changeView('all')">
+            <i class="fa-solid fa-layer-group me-1"></i> All
+        </button>
+
+        <button class="btn" [ngClass]="selectedView === 'upcoming' ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="changeView('upcoming')">
+            <i class="fa-solid fa-calendar-days me-1"></i> Upcoming
+        </button>
+
+        <button class="btn" [ngClass]="selectedView === 'past' ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="changeView('past')">
+            <i class="fa-solid fa-clock-rotate-left me-1"></i> Past
+        </button>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-lg-4 col-md-6" *ngFor="let event of filteredEvents">
+            <div class="event-card h-100">
+
+                <div class="event-image">
+                    <img [src]="event.imageUrl" [alt]="event.title" />
+
+                    <div class="date-badge">
+                        <span class="month">{{ formatMonthDay(event.date).month }}</span>
+                        <span class="day">{{ formatMonthDay(event.date).day }}</span>
+                    </div>
+
+                </div>
+
+                <div class="event-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span *ngIf="isEventSoon(event.date)" class="soon-badge">
+                            <i class="fa-solid fa-bolt me-1"></i> Soon
+                        </span>
+                    </div>
+
+                    <h5 class="event-title">{{ event.title }}</h5>
+
+                    <p class="event-desc">
+                        {{ event.description }}
+                    </p>
+
+                    <ul class="event-meta">
+                        <li>
+                            <i class="fa-solid fa-calendar-day"></i>
+                            {{ formatDate(event.date) }}
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            {{ event.time }}
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            {{ event.location }}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="filteredEvents.length === 0" class="col-12 text-center py-5">
+            <i class="fa-regular fa-calendar-xmark fa-3x text-muted mb-3"></i>
+            <h5 class="text-muted">No events found</h5>
+        </div>
+
+    </div>
+</div>

@@ -1,8 +1,11 @@
-export interface Event {
-    id: string;
+export interface EventSchedule {
+    id: number;
     title: string;
     description: string;
     date: Date;
+    endDate?: Date;
     time: string;
-    location?: string;
+    location: string;
+    imageUrl: string;
+    organizer: string;
 }

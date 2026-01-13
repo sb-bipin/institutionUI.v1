@@ -4,14 +4,13 @@ import { HeaderComponent } from "../shared/components/header/header.component";
 import { FooterComponent } from "../shared/components/footer/footer.component";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from '@angular/common';
-import { EventService } from '../core/services/event.service';
 import { ProgramService } from '../core/services/program.service';
 
 @Component({
   selector: 'app-features',
   standalone: true,
   imports: [RouterModule, CommonModule, TopBarComponent, HeaderComponent, FooterComponent],
-  providers: [ProgramService, EventService],
+  providers: [ProgramService],
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.scss']
 })

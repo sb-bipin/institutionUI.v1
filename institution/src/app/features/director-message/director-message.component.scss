@@ -292,7 +292,6 @@
     transform: rotateY(360deg);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .display-3 {
         font-size: 2.5rem;
@@ -305,4 +304,40 @@
     .profile-wrapper {
         margin-bottom: 2rem;
     }
+}
+
+.section-header {
+    position: relative;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+}
+
+.section-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #212529;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.05rem;
+    color: #6c757d;
+    margin-bottom: 1.2rem;
+}
+
+.section-divider {
+    width: 80px;
+    height: 4px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #007bff, #198754);
 }

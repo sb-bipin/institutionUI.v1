@@ -190,12 +190,12 @@
                 <div class="row g-4">
                     <div class="col-sm-6 col-md-6 col-lg-4" *ngFor="let newsItem of latestNews">
                         <div class="card news-card h-100 shadow-sm border-0">
-                            <div class="news-image" *ngIf="newsItem.image">
-                                <img [src]="newsItem.image" [alt]="newsItem.title" class="card-img-top" />
+                            <div class="news-image" *ngIf="newsItem.imageUrl">
+                                <img [src]="newsItem.imageUrl" [alt]="newsItem.title" class="card-img-top" />
                             </div>
                             <div class="card-body">
                                 <span class="badge bg-primary mb-2">
-                                    <i class="far fa-calendar-alt me-1"></i>{{ formatDate(newsItem.date) }}
+                                    <i class="far fa-calendar-alt me-1"></i>{{ formatDate(newsItem.publishDate) }}
                                 </span>
                                 <h3 class="card-title h5 fw-bold">{{ newsItem.title }}</h3>
                                 <p class="card-text text-muted">{{ newsItem.excerpt }}</p>

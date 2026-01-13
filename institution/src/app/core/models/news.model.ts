@@ -1,9 +1,9 @@
-export interface News {
-    id: string;
+export interface NewsItem {
+    id: number | string;
     title: string;
     excerpt: string;
     content: string;
-    date: Date;
-    image?: string;
-    author?: string;
+    author: string;
+    publishDate: Date;
+    imageUrl: string;
 }

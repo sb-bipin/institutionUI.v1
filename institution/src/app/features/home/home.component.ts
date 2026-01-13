@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, PLATFORM_ID, Inject } from '@angular/core
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NewsItem } from '../../core/models/news.model';
+import { EventSchedule } from '../../core/models/event.model';
 
 @Component({
   selector: 'app-home',
@@ -55,28 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  upcomingEvents = [
-    {
-      title: 'Orientation Program',
-      date: new Date('2025-02-10'),
-      time: '10:00 AM'
-    },
-    {
-      title: 'Career Fair',
-      date: new Date('2025-02-20'),
-      time: '9:00 AM'
-    },
-    {
-      title: 'Guest Lecture Series',
-      date: new Date('2025-03-05'),
-      time: '2:00 PM'
-    },
-    {
-      title: 'Industrial Visit',
-      date: new Date('2025-03-15'),
-      time: '8:00 AM'
-    }
-  ];
+  upcomingEvents: EventSchedule[] = [];
 
   latestNews: NewsItem[] = [];
 
@@ -93,6 +73,77 @@ export class HomeComponent implements OnInit, OnDestroy {
       .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
       .slice(0, 3);
 
+    this.upcomingEvents = this.getUpcomingEvents()
+      .filter(e => new Date(e.date) >= new Date())
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .slice(0, 3);
+
+
+  }
+
+  getUpcomingEvents(): EventSchedule[] {
+    return [
+      {
+        id: 1,
+        title: 'Annual Tech Summit 2026',
+        description: 'Join us for the biggest technology conference of the year.',
+        date: new Date('2026-02-05'),
+        time: '9:00 AM - 5:00 PM',
+        location: 'Main Auditorium',
+        imageUrl: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800',
+        organizer: 'Tech Department'
+      },
+      {
+        id: 2,
+        title: 'AI & Machine Learning Workshop',
+        description: 'Hands-on workshop on AI and ML.',
+        date: new Date('2026-01-25'),
+        time: '2:00 PM - 6:00 PM',
+        location: 'Computer Lab 301',
+        imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800',
+        organizer: 'Dr. Sarah Johnson'
+      },
+      {
+        id: 8,
+        title: 'Annual Sports Day',
+        description: 'A day of athletic competitions.',
+        date: new Date('2025-12-15'),
+        time: '8:00 AM - 6:00 PM',
+        location: 'Athletic Stadium',
+        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
+        organizer: 'Sports Department'
+      },
+      {
+        id: 4,
+        title: 'Annual Sports Day',
+        description: 'A day of athletic competitions.',
+        date: new Date('2026-04-15'),
+        time: '8:00 AM - 6:00 PM',
+        location: 'Athletic Stadium',
+        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
+        organizer: 'Sports Department'
+      },
+      {
+        id: 3,
+        title: 'World Lie Day',
+        description: 'A day of athletic competitions.',
+        date: new Date('2026-04-1'),
+        time: '8:00 AM - 6:00 PM',
+        location: 'Athletic Stadium',
+        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
+        organizer: 'Sports Department'
+      },
+      {
+        id: 5,
+        title: 'Annual Sports Day',
+        description: 'A day of athletic competitions.',
+        date: new Date('2025-12-15'),
+        time: '8:00 AM - 6:00 PM',
+        location: 'Athletic Stadium',
+        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
+        organizer: 'Sports Department'
+      }
+    ];
   }
 
   getNewsItems(): NewsItem[] {

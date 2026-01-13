@@ -241,3 +241,38 @@
         padding: 20px;
     }
 }
+
+.section-header {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+}
+
+.section-subtitle {
+    font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.section-header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #0d6efd, #6610f2);
+    border-radius: 2px;
+    margin: 0.75rem auto 0;
+}
+
+@media (max-width: 576px) {
+    .section-header {
+        padding: 0 0.5rem;
+    }
+}

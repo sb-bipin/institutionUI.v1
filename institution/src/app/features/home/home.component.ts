@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       // subtitle: 'Empowering Tomorrow\'s Leaders'
     },
     {
-      image: 'assets/images/slide2.jpg',
+      image: 'assets/images/nwa-clz.jpg',
       title: 'NWA Campus Life',
       // subtitle: 'Vibrant Community & Opportunities'
     }
@@ -238,6 +238,49 @@ export class HomeComponent implements OnInit, OnDestroy {
       month: date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
     };
   }
+
+  facilities = [
+    {
+      icon: 'fa-chalkboard-teacher',
+      title: 'Expert Faculty',
+      description: 'Nationally recognized teachers with industry experience'
+    },
+    {
+      icon: 'fa-laptop-code',
+      title: 'Modern Labs',
+      description: 'Computer labs with high-speed internet'
+    },
+    {
+      icon: 'fa-book-reader',
+      title: 'Library',
+      description: 'Well-stocked library with study lounges'
+    },
+    {
+      icon: 'fa-snowflake',
+      title: 'AC Classrooms',
+      description: 'Air-conditioned learning environment'
+    },
+    {
+      icon: 'fa-industry',
+      title: 'Industrial Visits',
+      description: 'Regular field trips and industry exposure'
+    },
+    {
+      icon: 'fa-user-tie',
+      title: 'Guest Lectures',
+      description: 'Sessions by industry experts'
+    },
+    {
+      icon: 'fa-briefcase',
+      title: 'Internships',
+      description: 'On-the-job training opportunities'
+    },
+    {
+      icon: 'fa-globe',
+      title: 'Global Opportunities',
+      description: 'International internship placements'
+    }
+  ];
 
   ngOnDestroy() {
     if (this.slideInterval) {

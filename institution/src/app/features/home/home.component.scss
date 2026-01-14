@@ -1,4 +1,3 @@
-// Custom Variables
 $primary-color: #0d6efd;
 $secondary-color: #6c757d;
 $success-color: #198754;
@@ -6,7 +5,6 @@ $info-color: #0dcaf0;
 $warning-color: #ffc107;
 $danger-color: #dc3545;
 
-// Hero Slider
 .hero-slider {
     height: 600px;
     overflow: hidden;
@@ -96,7 +94,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Programs Section
 .programs-section {
     .program-card {
         transition: all 0.3s ease;
@@ -126,7 +123,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Admission Banner
 .admission-banner {
     background: linear-gradient(135deg, $primary-color 0%, #0a58ca 100%);
     position: relative;
@@ -174,7 +170,6 @@ $danger-color: #dc3545;
     }
 }
 
-// About Section
 .about-section {
     .about-content {
         p {
@@ -184,7 +179,6 @@ $danger-color: #dc3545;
     }
 }
 
-// VMV Section
 .vmv-section {
     .vmv-card {
         transition: all 0.3s ease;
@@ -216,7 +210,6 @@ $danger-color: #dc3545;
     }
 }
 
-// News Section
 .news-section {
     .news-card {
         transition: all 0.3s ease;
@@ -255,7 +248,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Links & Events Section
 .links-events-section {
     .card {
         border-radius: 15px;
@@ -282,47 +274,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Benefits Section
-.benefits-section {
-    .nav-pills {
-        .nav-link {
-            border-radius: 25px;
-            padding: 10px 25px;
-            margin: 0 5px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-
-            &:not(.active) {
-                color: $primary-color;
-                background: white;
-                border-color: #dee2e6;
-
-                &:hover {
-                    background: rgba(13, 110, 253, 0.1);
-                    border-color: $primary-color;
-                }
-            }
-
-            &.active {
-                background: $primary-color;
-                border-color: $primary-color;
-            }
-        }
-    }
-
-    .list-unstyled li {
-        transition: all 0.2s ease;
-        padding: 5px;
-        border-radius: 5px;
-
-        &:hover {
-            background: rgba(13, 110, 253, 0.05);
-            transform: translateX(5px);
-        }
-    }
-}
-
-// Admission CTA
 .admission-cta {
     background: linear-gradient(135deg, $primary-color 0%, #0a58ca 100%);
     position: relative;
@@ -361,7 +312,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Animations
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -410,7 +360,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Responsive adjustments
 @media (max-width: 992px) {
     .programs-section .row {
         gap: 1rem;
@@ -517,7 +466,6 @@ $danger-color: #dc3545;
     }
 }
 
-// Utility Classes
 .text-justify {
     text-align: justify;
 }
@@ -527,5 +475,72 @@ $danger-color: #dc3545;
 
     &:hover {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    }
+}
+
+.highlights-section {
+    background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+    padding: 2rem 0;
+}
+
+.highlights-section .card-title {
+    font-size: 2rem;
+    color: var(--bs-primary);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+
+.highlights-section .card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bs-primary), #0056b3);
+    border-radius: 2px;
+}
+
+.highlight-card {
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    height: 100%;
+}
+
+.highlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-color: var(--bs-primary) !important;
+}
+
+.highlight-card i {
+    transition: transform 0.3s ease;
+}
+
+.highlight-card:hover i {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .highlights-section {
+        padding: 3rem 0;
+    }
+
+    .highlights-section .card-title {
+        font-size: 1.5rem;
+    }
+
+    .highlight-card i {
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .highlights-section .card-title::after {
+        width: 60px;
+        height: 3px;
     }
 }

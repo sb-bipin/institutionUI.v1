@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Close mobile menu on route change
     if (this.isBrowser) {
       this.router.events.pipe(
         filter(event => event instanceof NavigationEnd)
@@ -32,7 +31,6 @@ export class HeaderComponent implements OnInit {
         this.closeAllDropdowns();
       });
 
-      // Check initial scroll position
       this.checkScrollPosition();
     }
   }
@@ -71,7 +69,6 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
 
     if (this.isBrowser) {
-      // Prevent body scroll when mobile menu is open
       if (this.isMenuOpen) {
         document.body.style.overflow = 'hidden';
       } else {
@@ -96,7 +93,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  // Method to handle dropdown toggle on mobile
   toggleDropdown(event: Event) {
     if (this.isBrowser && window.innerWidth < 1200) {
       event.preventDefault();
@@ -106,10 +102,8 @@ export class HeaderComponent implements OnInit {
       if (dropdownMenu) {
         const isOpen = dropdownMenu.classList.contains('show');
 
-        // Close all other dropdowns
         this.closeAllDropdowns();
 
-        // Toggle current dropdown
         if (!isOpen) {
           dropdownMenu.classList.add('show');
           target.setAttribute('aria-expanded', 'true');

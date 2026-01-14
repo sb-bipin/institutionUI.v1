@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
     <div class="top-bar">
       <div class="container-fluid px-3 px-md-4">
         <div class="row align-items-center">
-          <!-- Contact Info -->
           <div class="col-12 col-lg-8 mb-2 mb-lg-0">
             <div class="contact-info d-flex flex-column flex-md-row justify-content-center justify-content-lg-start align-items-center gap-3 gap-md-4">
               <a  class="contact-item text-decoration-none">
@@ -27,7 +26,6 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
           
-          <!-- Actions -->
           <div class="col-12 col-lg-4">
             <div class="actions d-flex justify-content-center justify-content-lg-end align-items-center gap-2">
               <a href="http://46.250.226.63:8080/admin/" 

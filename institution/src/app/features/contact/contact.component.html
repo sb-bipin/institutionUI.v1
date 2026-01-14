@@ -1,1 +1,106 @@
-<p>contact works!</p>
+<section class="contact-section py-4 bg-light">
+    <div class="container-fluid px-3 px-lg-5">
+        <div class="contact-inner mx-auto">
+
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">
+                    <i class="fas fa-paper-plane me-2 text-primary"></i>
+                    Contact Nepal Western Academy
+                </h2>
+                <p class="section-subtitle">
+                    <i class="fas fa-comments text-primary me-1"></i>
+                    Have questions? We'd love to hear from you.
+                </p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                @for (info of contactInfo; track info.title) {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="bg-white text-center p-4 h-100 rounded-4 shadow-sm">
+                        <div class="icon-circle mb-3">
+                            <i class="fas {{ info.icon }}"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">{{ info.title }}</h6>
+
+                        @for (detail of info.details; track detail) {
+                        @if (info.link) {
+                        <a [href]="info.link" class="d-block text-decoration-none text-muted small">
+                            {{ detail }}
+                        </a>
+                        } @else {
+                        <p class="text-muted small mb-1">{{ detail }}</p>
+                        }
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="row g-5 align-items-stretch">
+
+                <div class="col-lg-6">
+                    <div class="bg-white p-4 p-lg-5 rounded-4 shadow-sm h-100">
+                        <h4 class="fw-bold mb-4">Send Us a Message</h4>
+
+                        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="Full Name" formControlName="name"
+                                        [class.is-invalid]="submitted && f['name'].errors">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="Email Address" formControlName="email"
+                                        [class.is-invalid]="submitted && f['email'].errors">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input class="form-control" placeholder="Phone Number" formControlName="phone"
+                                        [class.is-invalid]="submitted && f['phone'].errors">
+                                </div>
+
+                                <div class="col-12">
+                                    <textarea rows="5" class="form-control" placeholder="Message"
+                                        formControlName="message" [class.is-invalid]="submitted && f['message'].errors">
+                                    </textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-2" [disabled]="isSubmitting">
+                                        @if (!isSubmitting) {
+                                        <i class="fas fa-paper-plane me-2"></i> Send Message
+                                        } @else {
+                                        <i class="fas fa-spinner fa-spin me-2"></i> Sending...
+                                        }
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            @for (social of socialLinks; track social.icon) {
+                            <a [href]="social.url" target="_blank" class="social-btn" [attr.aria-label]="social.label">
+                                <i class="fab {{ social.icon }}"></i>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="ratio ratio-4x3 rounded-4 overflow-hidden shadow-sm h-100">
+
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.534540870581!2d80.5759271!3d28.703567099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a1ecdb9e3c7855%3A0xb4d12e784380682!2sNepal%20Western%20Academy!5e0!3m2!1sen!2snp!4v1768409248383!5m2!1sen!2snp"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

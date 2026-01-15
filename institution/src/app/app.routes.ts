@@ -79,6 +79,18 @@ export const routes: Routes = [
                     import('./features/contact/contact.component')
                         .then(m => m.ContactComponent)
             },
+            {
+                path: 'gallery',
+                loadComponent: () =>
+                    import('./features/image-gallery/image-gallery.component')
+                        .then(m => m.ImageGalleryComponent)
+            },
+            {
+                path: 'questions',
+                loadComponent: () =>
+                    import('./features/question-papers/question-papers.component')
+                        .then(m => m.QuestionPapersComponent)
+            },
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' }

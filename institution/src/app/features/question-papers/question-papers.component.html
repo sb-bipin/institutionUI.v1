@@ -1,0 +1,69 @@
+<div class="container py-3">
+    <div class="section-header text-center mb-4">
+        <h2 class="section-title">📚 Question Papers</h2>
+        <p class="section-subtitle">
+            Access previous year question papers for all programs and semesters
+        </p>
+    </div>
+
+    <div class="program-tabs mb-4">
+        <div class="row g-3">
+            <div class="col-12 col-md-4" *ngFor="let program of programs">
+                <div class="program-card" [class.active]="selectedProgram === program.name"
+                    (click)="selectProgram(program.name)"
+                    [style.border-color]="selectedProgram === program.id ? program.color : 'transparent'">
+                    <div class="program-icon" [style.background]="program.color">
+                        {{ program.icon }}
+                    </div>
+                    <h5 class="program-name mb-0">{{ program.name }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="semester-filter mb-4">
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button class="btn semester-btn" [class.active]="selectedSemester === 0" (click)="selectSemester(0)">
+                All Semesters
+            </button>
+            <button *ngFor="let sem of semesters" class="btn semester-btn" [class.active]="selectedSemester === sem"
+                (click)="selectSemester(sem)">
+                Sem {{ sem }}
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-4" *ngIf="filteredPapers.length > 0">
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let paper of filteredPapers">
+            <div class="paper-card">
+                <div class="paper-header" [style.background]="getProgramColor()">
+                    <div class="semester-badge">Semester {{ paper.semester }}</div>
+                    <i class="bi bi-file-earmark-text-fill paper-icon"></i>
+                </div>
+                <div class="paper-body">
+                    <h6 class="paper-subject">{{ paper.subject }}</h6>
+                    <p class="paper-code mb-2">{{ paper.code }}</p>
+                    <div class="paper-meta">
+                        <span class="badge bg-light text-dark">
+                            <i class="bi bi-calendar3"></i> {{ paper.year }}
+                        </span>
+                        <span class="badge bg-light text-dark">
+                            <i class="bi bi-file-pdf"></i> {{ paper.fileSize }}
+                        </span>
+                    </div>
+                </div>
+                <div class="paper-footer">
+                    <button class="btn btn-download w-100" (click)="downloadPaper(paper)">
+                        <i class="bi bi-download me-2"></i>Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center py-5" *ngIf="filteredPapers.length === 0">
+        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+        <h5 class="text-muted mt-3">No papers available</h5>
+        <p class="text-muted">Papers for this selection will be added soon</p>
+    </div>
+</div>

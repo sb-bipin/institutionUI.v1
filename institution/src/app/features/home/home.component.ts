@@ -116,7 +116,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .slice(0, 3);
   }
-
+  get currentYear(): number {
+    return new Date().getFullYear();
+  }
   getUpcomingEvents(): EventSchedule[] {
     return [
       {

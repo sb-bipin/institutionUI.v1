@@ -19,22 +19,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     {
       image: 'assets/images/DSC01977-copy-scaled.jpg',
       title: 'Welcome to Nepal Western Academy',
-      // subtitle: 'Excellence in Business Education'
     },
     {
       image: 'assets/images/DSC09282-scaled.jpg',
-      title: 'Shape Your Future',
-      // subtitle: 'Quality Education & Professional Development'
+      title: 'Shape Your Future with Excellence',
     },
     {
       image: 'assets/images/DSC02093-copy-scaled.jpg',
-      title: 'Innovation & Leadership',
-      // subtitle: 'Empowering Tomorrow\'s Leaders'
+      title: 'Innovation & Leadership Development',
     },
     {
       image: 'assets/images/nwa-clz.jpg',
-      title: 'NWA Campus Life',
-      // subtitle: 'Vibrant Community & Opportunities'
+      title: 'Join Our Vibrant Community',
     }
   ];
 
@@ -56,8 +52,50 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  upcomingEvents: EventSchedule[] = [];
+  facilities = [
+    {
+      icon: 'fa-chalkboard-teacher',
+      title: 'Expert Faculty',
+      description: 'Nationally recognized teachers with industry experience'
+    },
+    {
+      icon: 'fa-laptop-code',
+      title: 'Modern Labs',
+      description: 'State-of-the-art computer labs with high-speed internet'
+    },
+    {
+      icon: 'fa-book-reader',
+      title: 'Rich Library',
+      description: 'Extensive collection with comfortable study spaces'
+    },
+    {
+      icon: 'fa-snowflake',
+      title: 'AC Classrooms',
+      description: 'Climate-controlled learning environment'
+    },
+    {
+      icon: 'fa-industry',
+      title: 'Industrial Visits',
+      description: 'Regular field trips and industry exposure'
+    },
+    {
+      icon: 'fa-user-tie',
+      title: 'Guest Lectures',
+      description: 'Sessions by industry leaders and experts'
+    },
+    {
+      icon: 'fa-briefcase',
+      title: 'Internships',
+      description: 'Hands-on training opportunities'
+    },
+    {
+      icon: 'fa-globe',
+      title: 'Global Opportunities',
+      description: 'International internship placements'
+    }
+  ];
 
+  upcomingEvents: EventSchedule[] = [];
   latestNews: NewsItem[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
@@ -77,8 +115,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .filter(e => new Date(e.date) >= new Date())
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .slice(0, 3);
-
-
   }
 
   getUpcomingEvents(): EventSchedule[] {
@@ -104,10 +140,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         organizer: 'Dr. Sarah Johnson'
       },
       {
-        id: 8,
-        title: 'Annual Sports Day',
+        id: 3,
+        title: 'World Lie Day',
         description: 'A day of athletic competitions.',
-        date: new Date('2025-12-15'),
+        date: new Date('2026-04-01'),
         time: '8:00 AM - 6:00 PM',
         location: 'Athletic Stadium',
         imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
@@ -118,26 +154,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         title: 'Annual Sports Day',
         description: 'A day of athletic competitions.',
         date: new Date('2026-04-15'),
-        time: '8:00 AM - 6:00 PM',
-        location: 'Athletic Stadium',
-        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
-        organizer: 'Sports Department'
-      },
-      {
-        id: 3,
-        title: 'World Lie Day',
-        description: 'A day of athletic competitions.',
-        date: new Date('2026-04-1'),
-        time: '8:00 AM - 6:00 PM',
-        location: 'Athletic Stadium',
-        imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
-        organizer: 'Sports Department'
-      },
-      {
-        id: 5,
-        title: 'Annual Sports Day',
-        description: 'A day of athletic competitions.',
-        date: new Date('2025-12-15'),
         time: '8:00 AM - 6:00 PM',
         location: 'Athletic Stadium',
         imageUrl: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800',
@@ -174,33 +190,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         author: 'Admin Office',
         publishDate: new Date('2024-01-05'),
         imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop',
-      },
-      {
-        id: 4,
-        title: 'Research Team Makes Breakthrough in Renewable Energy',
-        excerpt: 'Our research department has developed a new solar panel technology that increases efficiency by 40%.',
-        content: 'Full article content here...',
-        author: 'Dr. Emily Rodriguez',
-        publishDate: new Date('2024-01-03'),
-        imageUrl: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=500&fit=crop',
-      },
-      {
-        id: 5,
-        title: 'Spring Semester Registration Opens Next Week',
-        excerpt: 'Students can begin registering for spring semester courses starting January 15th. New courses added in Business and Arts.',
-        content: 'Full article content here...',
-        author: 'Registrar Office',
-        publishDate: new Date('2024-01-02'),
-        imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=500&fit=crop',
-      },
-      {
-        id: 6,
-        title: 'Virtual Reality Lab Opens for Student Innovation',
-        excerpt: 'Experience the future of learning in our new VR lab, equipped with cutting-edge technology for immersive education.',
-        content: 'Full article content here...',
-        author: 'Tech Department',
-        publishDate: new Date('2023-12-28'),
-        imageUrl: 'https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=500&fit=crop',
       }
     ];
   }
@@ -225,11 +214,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   formatDate(date: Date): string {
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${monthNames[date.getMonth()]} ${date.getDate()}`;
   }
 
   getMonthDay(date: Date) {
@@ -239,53 +226,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     };
   }
 
-  facilities = [
-    {
-      icon: 'fa-chalkboard-teacher',
-      title: 'Expert Faculty',
-      description: 'Nationally recognized teachers with industry experience'
-    },
-    {
-      icon: 'fa-laptop-code',
-      title: 'Modern Labs',
-      description: 'Computer labs with high-speed internet'
-    },
-    {
-      icon: 'fa-book-reader',
-      title: 'Library',
-      description: 'Well-stocked library with study lounges'
-    },
-    {
-      icon: 'fa-snowflake',
-      title: 'AC Classrooms',
-      description: 'Air-conditioned learning environment'
-    },
-    {
-      icon: 'fa-industry',
-      title: 'Industrial Visits',
-      description: 'Regular field trips and industry exposure'
-    },
-    {
-      icon: 'fa-user-tie',
-      title: 'Guest Lectures',
-      description: 'Sessions by industry experts'
-    },
-    {
-      icon: 'fa-briefcase',
-      title: 'Internships',
-      description: 'On-the-job training opportunities'
-    },
-    {
-      icon: 'fa-globe',
-      title: 'Global Opportunities',
-      description: 'International internship placements'
-    }
-  ];
-
   ngOnDestroy() {
     if (this.slideInterval) {
       clearInterval(this.slideInterval);
     }
   }
-
 }

@@ -100,3 +100,37 @@ body {
         transform: rotate(90deg);
     }
 }
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding-bottom: 0.5rem;
+    }
+
+    .navbar-nav {
+        align-items: flex-start;
+    }
+
+    .dropdown-menu {
+        animation: fadeDown 0.2s ease;
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

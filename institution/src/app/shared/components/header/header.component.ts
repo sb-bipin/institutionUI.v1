@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   isMenuOpen = false;
   isSticky = false;
   isBrowser: boolean;
@@ -23,41 +24,32 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isBrowser) {
-      this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe(() => {
-        this.isMenuOpen = false;
+    if (!this.isBrowser) return;
+
+    // ✅ CLOSE MENU + UNLOCK SCROLL ON ROUTE CHANGE
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.closeMenu();
         this.closeAllDropdowns();
       });
 
-      this.checkScrollPosition();
-    }
+    this.checkScrollPosition();
   }
 
-  @HostListener('window:scroll', [])
+  /* ---------------- SCROLL & RESIZE ---------------- */
+
+  @HostListener('window:scroll')
   onWindowScroll() {
     if (this.isBrowser) {
       this.checkScrollPosition();
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (this.isBrowser) {
-      const target = event.target as HTMLElement;
-      const clickedInside = target.closest('.navbar');
-
-      if (!clickedInside && this.isMenuOpen) {
-        this.isMenuOpen = false;
-      }
-    }
-  }
-
-  @HostListener('window:resize', [])
+  @HostListener('window:resize')
   onWindowResize() {
-    if (this.isBrowser && window.innerWidth >= 1200) {
-      this.isMenuOpen = false;
+    if (this.isBrowser && window.innerWidth >= 992) {
+      this.closeMenu();
     }
   }
 
@@ -65,53 +57,49 @@ export class HeaderComponent implements OnInit {
     this.isSticky = window.scrollY > 50;
   }
 
+  /* ---------------- MENU CONTROL ---------------- */
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-
-    if (this.isBrowser) {
-      if (this.isMenuOpen) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    }
+    this.toggleBodyScroll(this.isMenuOpen);
   }
 
   closeMenu() {
     this.isMenuOpen = false;
-    if (this.isBrowser) {
-      document.body.style.overflow = '';
+    this.toggleBodyScroll(false);
+  }
+
+  private toggleBodyScroll(lock: boolean) {
+    if (!this.isBrowser) return;
+    document.body.style.overflow = lock ? 'hidden' : '';
+  }
+
+  /* ---------------- DROPDOWN (MOBILE) ---------------- */
+
+  toggleDropdown(event: Event) {
+    if (!this.isBrowser || window.innerWidth >= 992) return;
+
+    event.preventDefault();
+
+    const trigger = event.currentTarget as HTMLElement;
+    const menu = trigger.nextElementSibling as HTMLElement;
+
+    if (!menu) return;
+
+    const isOpen = menu.classList.contains('show');
+    this.closeAllDropdowns();
+
+    if (!isOpen) {
+      menu.classList.add('show');
+      trigger.setAttribute('aria-expanded', 'true');
     }
   }
 
   private closeAllDropdowns() {
-    if (this.isBrowser) {
-      const dropdowns = document.querySelectorAll('.dropdown-menu.show');
-      dropdowns.forEach(dropdown => {
-        dropdown.classList.remove('show');
-      });
-    }
-  }
+    if (!this.isBrowser) return;
 
-  toggleDropdown(event: Event) {
-    if (this.isBrowser && window.innerWidth < 1200) {
-      event.preventDefault();
-      const target = event.currentTarget as HTMLElement;
-      const dropdownMenu = target.nextElementSibling as HTMLElement;
-
-      if (dropdownMenu) {
-        const isOpen = dropdownMenu.classList.contains('show');
-
-        this.closeAllDropdowns();
-
-        if (!isOpen) {
-          dropdownMenu.classList.add('show');
-          target.setAttribute('aria-expanded', 'true');
-        } else {
-          dropdownMenu.classList.remove('show');
-          target.setAttribute('aria-expanded', 'false');
-        }
-      }
-    }
+    document
+      .querySelectorAll('.dropdown-menu.show')
+      .forEach(el => el.classList.remove('show'));
   }
 }

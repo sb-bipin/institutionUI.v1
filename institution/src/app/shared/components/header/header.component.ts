@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if (!this.isBrowser) return;
 
-    // ✅ CLOSE MENU + UNLOCK SCROLL ON ROUTE CHANGE
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -37,7 +36,6 @@ export class HeaderComponent implements OnInit {
     this.checkScrollPosition();
   }
 
-  /* ---------------- SCROLL & RESIZE ---------------- */
 
   @HostListener('window:scroll')
   onWindowScroll() {
@@ -57,7 +55,6 @@ export class HeaderComponent implements OnInit {
     this.isSticky = window.scrollY > 50;
   }
 
-  /* ---------------- MENU CONTROL ---------------- */
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -74,7 +71,6 @@ export class HeaderComponent implements OnInit {
     document.body.style.overflow = lock ? 'hidden' : '';
   }
 
-  /* ---------------- DROPDOWN (MOBILE) ---------------- */
 
   toggleDropdown(event: Event) {
     if (!this.isBrowser || window.innerWidth >= 992) return;

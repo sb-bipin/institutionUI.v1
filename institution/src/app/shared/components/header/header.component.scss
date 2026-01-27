@@ -11,11 +11,84 @@
     justify-content: center;
 }
 
+
+.nav-item {
+    transition: transform 0.3s ease;
+}
+
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+@media (min-width: 992px) {
+    .nav-item:hover {
+        transform: translateY(-3px);
+    }
+
+    .nav-link {
+        overflow: hidden;
+    }
+
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-link:hover {
+        color: #0056b3 !important;
+        transform: scale(1.05);
+    }
+
+    .nav-link:hover::before {
+        width: 80%;
+    }
+
+    .nav-link.active {
+        color: #0056b3 !important;
+        font-weight: 600;
+    }
+
+    .nav-link.active::before {
+        width: 80%;
+        background: linear-gradient(90deg, #0056b3, #007bff);
+    }
+
+    .nav-item:hover .nav-link {
+        text-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Special styling for Admission link */
+    .nav-link.text-tertiary:hover {
+        color: #d63384 !important;
+        transform: scale(1.1);
+    }
+
+    .nav-link.text-danger:hover {
+        color: #dc3545 !important;
+        transform: scale(1.1);
+    }
+}
+
 @media (max-width: 991px) {
+    .nav-link:active {
+        background-color: rgba(0, 123, 255, 0.1);
+        border-radius: 5px;
+    }
+
     .navbar-nav {
         justify-content: flex-start;
     }
 }
+
 
 @media (min-width: 992px) {
 

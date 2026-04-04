@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
             <div class="contact-info">
               <a class="contact-item">
                 <i class="fas fa-envelope"></i>
-                <span>info&nbsp64;nwa.edu.np</span>
+                <span>info&#64;nwa.edu.np</span>
               </a>
 
               <a class="contact-item">

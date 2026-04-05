@@ -1,0 +1,29 @@
+<div class="login-wrapper">
+    <div #canvasContainer class="background-canvas"></div>
+
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <div class="input-group">
+                <input type="email" placeholder="Email" formControlName="email" />
+                <small *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+                    Valid email is required
+                </small>
+            </div>
+
+            <div class="input-group password-group">
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password" />
+                <span class="eye-icon" (click)="togglePassword()">
+                    {{ showPassword ? '🙈' : '👁️' }}
+                </span>
+                <small *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                    Password is required
+                </small>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>

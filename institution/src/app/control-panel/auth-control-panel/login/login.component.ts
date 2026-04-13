@@ -48,7 +48,7 @@ export class LoginComponent {
           timer: 1500,
           showConfirmButton: false,
         }).then(() => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['control-panel/dashboard']);
         });
       },
       error: (err) => {

@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         return false;
     }
 
-    if (auth.isTokenExpired()) {
+    if (auth.istokenExpired()) {
         auth.logout();
         return false;
     }

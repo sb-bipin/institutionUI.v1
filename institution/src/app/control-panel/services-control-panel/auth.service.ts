@@ -3,16 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environments';
-import { User, LoginPayload, ServiceResponse, LoginResponseDto } from '../models-control-panel/auth.model';
+import { LoginUser, LoginPayload, ServiceResponse, LoginResponseDto } from '../models-control-panel/auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   private readonly API = `${environment.apiBaseUrl}/Auth`;
 
-  private _user = signal<User | null>(this.loadUser());
+  private _user = signal<LoginUser | null>(this.loadUser());
   readonly user = this._user.asReadonly();
   readonly isLoggedIn = computed(() => !!this._user());
+  readonly istokenExpired = computed(() => this.isTokenExpired());
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -46,7 +47,7 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  private decodeToken(token: string): User | null {
+  private decodeToken(token: string): LoginUser | null {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return {
@@ -60,7 +61,7 @@ export class AuthService {
     }
   }
 
-  private loadUser(): User | null {
+  private loadUser(): LoginUser | null {
     try {
       const raw = localStorage.getItem('user');
       return raw ? JSON.parse(raw) : null;
@@ -68,4 +69,14 @@ export class AuthService {
       return null;
     }
   }
+
+  private isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const currentTime = Math.floor(Date.now() / 1000);
+    return payload.exp < currentTime;
+  }
+
 }

@@ -13,7 +13,7 @@ export interface ServiceResponse<T> {
     data: T;
 }
 
-export interface User {
+export interface LoginUser {
     id: string;
     email: string;
     name: string;

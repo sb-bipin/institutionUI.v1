@@ -1,1 +1,344 @@
-<p>user-list works!</p>
+@if (toast()) {
+<div class="ul-toast" [ngClass]="'ul-toast--' + toast()!.type">
+    <i class="fas" [ngClass]="toast()!.type === 'success' ? 'fa-circle-check' : 'fa-circle-xmark'"></i>
+    {{ toast()!.message }}
+</div>
+}
+
+<div class="ul-page">
+
+    <div class="ul-header">
+        <div>
+            <h1 class="ul-title">Users</h1>
+            <p class="ul-subtitle">{{ filteredUsers().length }} total members</p>
+        </div>
+        <div class="ul-header-actions">
+            <button class="ul-btn-ghost" (click)="loadUsers()" title="Refresh">
+                <i class="fas fa-rotate-right" [class.ul-spin]="isLoading()"></i>
+            </button>
+            <button class="ul-btn-primary" (click)="openCreate()">
+                <i class="fas fa-plus"></i> Create user
+            </button>
+        </div>
+    </div>
+
+    <div class="ul-card">
+
+        <div class="ul-search-bar">
+            <div class="ul-search-wrap">
+                <i class="fas fa-search ul-search-icon"></i>
+                <input class="ul-search-input" type="text" placeholder="Search by name, email or username..."
+                    [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
+            </div>
+        </div>
+
+        @if (isLoading() && users().length === 0) {
+        <div class="ul-loading">
+            <i class="fas fa-spinner ul-spin"></i>
+            <p>Loading users…</p>
+        </div>
+        }
+
+        <div class="ul-table-wrap">
+            <table class="ul-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (user of filteredUsers(); track user.id) {
+                    <tr>
+                        <td>
+                            <div class="ul-user-cell">
+                                <div class="ul-avatar" [ngClass]="'ul-avatar--' + user.status">
+                                    {{ getInitials(user.name) }}
+                                </div>
+                                <span class="ul-user-name">{{ user.name }}</span>
+                            </div>
+                        </td>
+                        <td class="ul-muted">{{ user.username }}</td>
+                        <td class="ul-muted">{{ user.email }}</td>
+                        <td>
+                            <span class="ul-badge" [ngClass]="'ul-badge--' + user.status">{{ user.status }}</span>
+                        </td>
+                        <td>
+                            <div class="ul-actions">
+                                <button class="ul-btn-icon ul-btn-icon--view" (click)="openView(user)" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="ul-btn-icon ul-btn-icon--edit" (click)="openEdit(user)" title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="5" class="ul-empty">
+                            <i class="fas fa-users-slash"></i>
+                            <p>No users found.</p>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ul-mobile-list">
+            @for (user of filteredUsers(); track user.id) {
+            <div class="ul-mobile-card">
+                <div class="ul-mobile-top">
+                    <div class="ul-avatar" [ngClass]="'ul-avatar--' + user.status">{{ getInitials(user.name) }}</div>
+                    <div class="ul-mobile-meta">
+                        <span class="ul-user-name">{{ user.name }}</span>
+                        <span class="ul-muted">{{ user.username }}</span>
+                    </div>
+                    <span class="ul-badge" [ngClass]="'ul-badge--' + user.status">{{ user.status }}</span>
+                </div>
+                <div class="ul-mobile-email ul-muted"><i class="fas fa-envelope"></i> {{ user.email }}</div>
+                <div class="ul-mobile-actions">
+                    <button class="ul-mobile-btn" (click)="openView(user)"><i class="fas fa-eye"></i> View</button>
+                    <button class="ul-mobile-btn ul-mobile-btn--edit" (click)="openEdit(user)"><i
+                            class="fas fa-pen"></i> Edit</button>
+                </div>
+            </div>
+            } @empty {
+            <p class="ul-empty">No users found.</p>
+            }
+        </div>
+
+    </div>
+</div>
+
+@if (showViewModal() && selectedUser()) {
+<div class="ul-modal-backdrop" (click)="closeAll()">
+    <div class="ul-modal" (click)="$event.stopPropagation()">
+        <div class="ul-modal-header">
+            <span class="ul-modal-title"><i class="fas fa-user"></i> User details</span>
+            <button class="ul-modal-close" (click)="closeAll()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ul-modal-body">
+            <div class="ul-view-hero">
+                <div class="ul-avatar ul-avatar--lg" [ngClass]="'ul-avatar--' + selectedUser()!.status">
+                    {{ getInitials(selectedUser()!.name) }}
+                </div>
+                <div>
+                    <p class="ul-user-name" style="font-size:16px">{{ selectedUser()!.name }}</p>
+                    <p class="ul-muted">{{ selectedUser()!.username }}</p>
+                </div>
+            </div>
+            <div class="ul-view-fields">
+                <div class="ul-view-field">
+                    <span class="ul-field-label"><i class="fas fa-envelope"></i> Email</span>
+                    <span class="ul-field-value">{{ selectedUser()!.email }}</span>
+                </div>
+                <div class="ul-view-field">
+                    <span class="ul-field-label"><i class="fas fa-circle-dot"></i> Status</span>
+                    <span class="ul-badge" [ngClass]="'ul-badge--' + selectedUser()!.status">{{ selectedUser()!.status
+                        }}</span>
+                </div>
+                <div class="ul-view-field">
+                    <span class="ul-field-label"><i class="fas fa-at"></i> Username</span>
+                    <span class="ul-field-value">&#64;{{ selectedUser()!.username }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="ul-modal-footer">
+            <button class="ul-btn-outline" (click)="closeAll()"><i class="fas fa-times"></i> Close</button>
+            <button class="ul-btn-primary" (click)="closeAll(); openEdit(selectedUser()!)">
+                <i class="fas fa-pen"></i> Edit user
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if (showCreateModal()) {
+<div class="ul-modal-backdrop" (click)="closeAll()">
+    <div class="ul-modal" (click)="$event.stopPropagation()">
+        <div class="ul-modal-header">
+            <span class="ul-modal-title"><i class="fas fa-user-plus"></i> Create user</span>
+            <button class="ul-modal-close" (click)="closeAll()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ul-modal-body">
+            <div class="ul-form-grid">
+                <div class="ul-form-field">
+                    <label class="ul-label">First name *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-user ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" placeholder="Arun"
+                            [ngModel]="createForm().firstName"
+                            (ngModelChange)="updateCreateField('firstName', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Last name *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-user ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" placeholder="Kumar"
+                            [ngModel]="createForm().lastName" (ngModelChange)="updateCreateField('lastName', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Username *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-at ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" placeholder="arunkumar"
+                            [ngModel]="createForm().username" (ngModelChange)="updateCreateField('username', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Status</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-circle-dot ul-input-icon"></i>
+                        <select class="ul-input ul-input--icon" [ngModel]="createForm().status"
+                            (ngModelChange)="updateCreateField('status', $event)">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ul-form-field ul-form-field--full">
+                    <label class="ul-label">Email *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-envelope ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="email" placeholder="arun@example.com"
+                            [ngModel]="createForm().email" (ngModelChange)="updateCreateField('email', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field ul-form-field--full">
+                    <label class="ul-label">Password *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-lock ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="password" placeholder="••••••••"
+                            [ngModel]="createForm().password" (ngModelChange)="updateCreateField('password', $event)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ul-modal-footer">
+            <button class="ul-btn-outline" (click)="closeAll()"><i class="fas fa-times"></i> Cancel</button>
+            <button class="ul-btn-primary" (click)="submitCreate()" [disabled]="isLoading()">
+                <i class="fas" [ngClass]="isLoading() ? 'fa-spinner ul-spin' : 'fa-user-plus'"></i>
+                {{ isLoading() ? 'Creating…' : 'Create user' }}
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if (showEditModal()) {
+<div class="ul-modal-backdrop" (click)="closeAll()">
+    <div class="ul-modal" (click)="$event.stopPropagation()">
+        <div class="ul-modal-header">
+            <span class="ul-modal-title"><i class="fas fa-user-pen"></i> Edit user</span>
+            <button class="ul-modal-close" (click)="closeAll()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ul-modal-body">
+            <div class="ul-form-grid">
+                <div class="ul-form-field">
+                    <label class="ul-label">First name *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-user ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" [ngModel]="editForm().firstName"
+                            (ngModelChange)="updateEditField('firstName', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Last name *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-user ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" [ngModel]="editForm().lastName"
+                            (ngModelChange)="updateEditField('lastName', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Username *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-at ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="text" [ngModel]="editForm().username"
+                            (ngModelChange)="updateEditField('username', $event)" />
+                    </div>
+                </div>
+                <!-- <div class="ul-form-field">
+                    <label class="ul-label">Status</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-circle-dot ul-input-icon"></i>
+                        <select class="ul-input ul-input--icon" [ngModel]="editForm().status"
+                            (ngModelChange)="updateEditField('status', $event)">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="ul-form-field ul-form-field--full">
+                    <label class="ul-label">Email *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-envelope ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="email" [ngModel]="editForm().email"
+                            (ngModelChange)="updateEditField('email', $event)" />
+                    </div>
+                </div>
+            </div>
+            <div class="ul-reset-section">
+                <button class="ul-btn-reset" (click)="openResetPassword(editForm())">
+                    <i class="fas fa-key"></i> Reset password
+                </button>
+            </div>
+        </div>
+        <div class="ul-modal-footer">
+            <button class="ul-btn-outline" (click)="closeAll()"><i class="fas fa-times"></i> Cancel</button>
+            <button class="ul-btn-primary" (click)="submitEdit()" [disabled]="isLoading()">
+                <i class="fas" [ngClass]="isLoading() ? 'fa-spinner ul-spin' : 'fa-floppy-disk'"></i>
+                {{ isLoading() ? 'Saving…' : 'Save changes' }}
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@if (showResetModal()) {
+<div class="ul-modal-backdrop" (click)="closeAll()">
+    <div class="ul-modal ul-modal--sm" (click)="$event.stopPropagation()">
+        <div class="ul-modal-header">
+            <span class="ul-modal-title"><i class="fas fa-key"></i> Reset password</span>
+            <button class="ul-modal-close" (click)="closeAll()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="ul-modal-body">
+            <div class="ul-form-grid" style="grid-template-columns:1fr">
+                <div class="ul-form-field">
+                    <label class="ul-label">New password *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-lock ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="password" placeholder="••••••••"
+                            [ngModel]="resetForm().newPassword"
+                            (ngModelChange)="updateResetField('newPassword', $event)" />
+                    </div>
+                </div>
+                <div class="ul-form-field">
+                    <label class="ul-label">Confirm password *</label>
+                    <div class="ul-input-wrap">
+                        <i class="fas fa-lock ul-input-icon"></i>
+                        <input class="ul-input ul-input--icon" type="password" placeholder="••••••••"
+                            [ngModel]="resetForm().confirm" (ngModelChange)="updateResetField('confirm', $event)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ul-modal-footer">
+            <button class="ul-btn-outline" (click)="closeAll()"><i class="fas fa-times"></i> Cancel</button>
+            <button class="ul-btn-primary" (click)="submitResetPassword()" [disabled]="isLoading()">
+                <i class="fas" [ngClass]="isLoading() ? 'fa-spinner ul-spin' : 'fa-key'"></i>
+                {{ isLoading() ? 'Resetting…' : 'Reset password' }}
+            </button>
+        </div>
+    </div>
+</div>
+}

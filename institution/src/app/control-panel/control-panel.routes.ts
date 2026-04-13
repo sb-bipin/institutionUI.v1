@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { authGuard } from "./guards-control-panel/auth.guard";
 
 export const controlPanelRoutes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -8,12 +9,33 @@ export const controlPanelRoutes: Routes = [
         loadComponent: () =>
             import('./auth-control-panel/login/login.component')
                 .then(m => m.LoginComponent)
+    },
+    {
+        path: 'dashboard',
+        loadComponent: () =>
+            import('./dashboard-shell/dashboard-shell.component')
+                .then(m => m.DashboardShellComponent),
+        canActivate: [authGuard],
+        children: [
+            { path: '', redirectTo: 'overview', pathMatch: 'full' },
+            {
+                path: 'users',
+                loadComponent: () =>
+                    import('./auth-control-panel/user-list/user-list.component')
+                        .then(m => m.UserListComponent)
+            },
+            // {
+            //     path: 'users',
+            //     loadComponent: () =>
+            //         import('./pages/users/users.component')
+            //             .then(m => m.UsersComponent)
+            // },
+            // {
+            //     path: 'settings',
+            //     loadComponent: () =>
+            //         import('./pages/settings/settings.component')
+            //             .then(m => m.SettingsComponent)
+            // },
+        ]
     }
-    // {
-    //     path: 'home',
-    //     loadComponent: () =>
-    //         import('./home/home.component')
-    //             .then(m => m.HomeComponent)
-    // }
-
 ];

@@ -5,7 +5,7 @@ import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-control-panel',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, TopBarComponent],
   templateUrl: './control-panel.component.html',
   styleUrl: './control-panel.component.scss'
 })

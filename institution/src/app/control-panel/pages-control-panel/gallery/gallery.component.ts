@@ -42,10 +42,9 @@ export class GalleryComponent implements OnInit {
     this.isLoading.set(true);
     this.galleryService.getAll().subscribe({
       next: (items) => {
-        // Fix each item's imageUrl
         const fixedItems = items.map(item => ({
           ...item,
-          imageUrl: this.getCorrectImageUrl(item.imageUrl)
+          imageUrl: this.galleryService.getCorrectImageUrl(item.imageUrl)
         }));
         this.items.set(fixedItems);
         this.isLoading.set(false);
@@ -111,10 +110,9 @@ export class GalleryComponent implements OnInit {
 
     this.galleryService.create(formData).subscribe({
       next: (newItem) => {
-        // Fix the imageUrl for the newly created item
         const fixedItem = {
           ...newItem,
-          imageUrl: this.getCorrectImageUrl(newItem.imageUrl)
+          imageUrl: this.galleryService.getCorrectImageUrl(newItem.imageUrl)
         };
         this.items.update(prev => [fixedItem, ...prev]);
         this.form = { title: '', description: '', imageFile: null };
@@ -197,9 +195,5 @@ export class GalleryComponent implements OnInit {
     this.lightboxItem.set(null);
   }
 
-  private getCorrectImageUrl(wrongUrl: string): string {
-    const filename = wrongUrl.split('/').pop();
-    if (!filename) return wrongUrl;
-    return `${this.apiUrl}/${filename}`;
-  }
+
 }

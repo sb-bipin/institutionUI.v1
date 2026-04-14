@@ -1,0 +1,176 @@
+<div class="overview-dashboard p-3 p-md-4 p-lg-5">
+    <!-- Stats Row -->
+    <div class="row g-4 mb-5">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small mb-1">Total Images</p>
+                        <p class="stat-value mb-0">{{ stats().totalImages }}</p>
+                        <small class="stat-trend up"><i class="fas fa-arrow-up me-1"></i>12%</small>
+                    </div>
+                    <i class="fas fa-images stat-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small mb-1">Active Notices</p>
+                        <p class="stat-value mb-0">{{ stats().activeNotices }}</p>
+                        <small class="stat-trend up"><i class="fas fa-arrow-up me-1"></i>3 new</small>
+                    </div>
+                    <i class="fas fa-bullhorn stat-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small mb-1">Upcoming Events</p>
+                        <p class="stat-value mb-0">{{ stats().upcomingEventsCount }}</p>
+                        <small class="stat-trend up">this month</small>
+                    </div>
+                    <i class="fas fa-calendar-alt stat-icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card stat-card h-100 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted small mb-1">Total Visitors</p>
+                        <p class="stat-value mb-0">{{ stats().totalVisitors }}</p>
+                        <small class="stat-trend up"><i class="fas fa-arrow-up me-1"></i>18%</small>
+                    </div>
+                    <i class="fas fa-eye stat-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Row (Full width) -->
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-semibold"><i class="fas fa-images text-primary me-2"></i>Recent Gallery Images
+                    </h5>
+                    <a routerLink="/control-panel/dashboard/gallery" class="text-decoration-none small">View all <i
+                            class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+                <div class="card-body p-4">
+                    @if (isLoading().images) {
+                    <div class="text-center py-5"><i class="fas fa-spinner fa-spin fa-2x text-primary"></i></div>
+                    } @else {
+                    <div class="gallery-grid">
+                        @for (img of recentImages(); track img.id) {
+                        <div class="gallery-item">
+                            <img [src]="img.imageUrl" [alt]="img.title" loading="lazy">
+                            <div class="overlay">
+                                <i class="fas fa-trash-alt" (click)="$event.stopPropagation(); deleteImage(img.id)"></i>
+                            </div>
+                        </div>
+                        }
+                        <div class="gallery-item add-more" routerLink="/control-panel/dashboard/gallery">
+                            <i class="fas fa-plus-circle fa-2x"></i>
+                            <small>Add new</small>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Row: Notices and Events (side by side) -->
+    <div class="row g-4 mt-4">
+        <!-- Notices Column -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+                <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-semibold"><i class="fas fa-bullhorn text-warning me-2"></i>Recent Notices</h5>
+                    <a routerLink="/control-panel/dashboard/notices" class="text-decoration-none small">Manage</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @for (notice of recentNotices(); track notice.id) {
+                        <div class="list-group-item notice-item border-0 px-4 py-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="mb-1 fw-medium">{{ notice.title }}</p>
+                                    <small class="text-muted">Posted {{ formatDate(notice.createdAt) }}</small>
+                                </div>
+                                <span class="badge rounded-pill" [class.badge-published]="notice.status === 'Published'"
+                                    [class.badge-draft]="notice.status === 'Draft'">
+                                    {{ notice.status }}
+                                </span>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div class="p-3 text-center border-top">
+                        <button routerLink="/control-panel/dashboard/notices/new"
+                            class="btn btn-link text-decoration-none">+ Add New Notice</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Column -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 h-100">
+                <div class="card-header bg-white border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-semibold"><i class="fas fa-calendar-alt text-success me-2"></i>Upcoming Events
+                    </h5>
+                    <a routerLink="/control-panel/dashboard/events" class="text-decoration-none small">Calendar</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @for (event of upcomingEvents(); track event.id) {
+                        <div class="list-group-item border-0 px-4 py-3">
+                            <div class="d-flex gap-3">
+                                <div class="event-date flex-shrink-0">
+                                    <div class="month">{{ event.date | date:'MMM' | uppercase }}</div>
+                                    <div class="day">{{ event.date | date:'d' }}</div>
+                                </div>
+                                <div>
+                                    <p class="mb-1 fw-medium">{{ event.title }}</p>
+                                    <small class="text-muted"><i class="fas fa-location-dot me-1"></i>{{ event.location
+                                        }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div class="p-3 text-center border-top">
+                        <button routerLink="/control-panel/dashboard/events/new"
+                            class="btn btn-link text-decoration-none">+ Create Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Row -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="mb-3 fw-semibold"><i class="fas fa-bolt text-warning me-2"></i>Quick Actions</h5>
+                    <div class="quick-actions d-flex flex-wrap gap-2">
+                        <button class="btn-quick" routerLink="/control-panel/dashboard/gallery"><i
+                                class="fas fa-upload"></i> Upload Image</button>
+                        <button class="btn-quick" routerLink="/control-panel/dashboard/notices/new"><i
+                                class="fas fa-pen"></i> Publish Notice</button>
+                        <button class="btn-quick" routerLink="/control-panel/dashboard/events/new"><i
+                                class="fas fa-plus-circle"></i> Add Event</button>
+                        <button class="btn-quick"><i class="fas fa-chart-line"></i> View Reports</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

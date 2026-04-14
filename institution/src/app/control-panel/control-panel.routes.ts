@@ -19,6 +19,12 @@ export const controlPanelRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'overview', pathMatch: 'full' },
             {
+                path: 'overview',
+                loadComponent: () =>
+                    import('./dashboard-shell/overview/overview.component')
+                        .then(m => m.OverviewComponent)
+            },
+            {
                 path: 'users',
                 loadComponent: () =>
                     import('./auth-control-panel/user-list/user-list.component')

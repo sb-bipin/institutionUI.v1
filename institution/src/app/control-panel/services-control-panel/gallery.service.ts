@@ -41,4 +41,10 @@ export class GalleryService {
             map(() => void 0)
         );
     }
+
+    public getCorrectImageUrl(wrongUrl: string): string {
+        const filename = wrongUrl.split('/').pop();
+        if (!filename) return wrongUrl;
+        return `${this.apiUrl}/${filename}`;
+    }
 }

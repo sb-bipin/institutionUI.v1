@@ -23,7 +23,14 @@
                 </small>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" [disabled]="isLoading()">
+                @if (isLoading()) {
+                <i class="fa fa-spinner fa-spin"></i> Logging in...
+                } @else {
+                Login
+                }
+            </button>
+
         </form>
     </div>
 </div>

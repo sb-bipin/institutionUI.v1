@@ -5,12 +5,14 @@ import {
   ElementRef,
   ViewChild,
   inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  signal
 } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services-control-panel/auth.service';
 import Swal from 'sweetalert2';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,8 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   @ViewChild('canvasContainer') canvasRef!: ElementRef;
+
+  isLoading = signal(false);
 
   showPassword = false;
 
@@ -38,29 +42,31 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-
-    this.authService.login(this.loginForm.value as any).subscribe({
-      next: () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful',
-          text: 'Welcome back!',
-          timer: 1500,
-          showConfirmButton: false,
-        }).then(() => {
-          this.router.navigate(['control-panel/dashboard']);
-        });
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          timer: 1500,
-          showConfirmButton: false,
-          text: err?.error?.errors?.[0] || 'Invalid credentials',
-        });
-      }
-    });
+    this.isLoading.set(true);
+    this.authService.login(this.loginForm.value as any)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'Welcome back!',
+            timer: 1500,
+            showConfirmButton: false,
+          }).then(() => {
+            this.router.navigate(['control-panel/dashboard']);
+          });
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            timer: 1500,
+            showConfirmButton: false,
+            text: err?.error?.errors?.[0] || 'Invalid credentials',
+          });
+        }
+      });
   }
 
 

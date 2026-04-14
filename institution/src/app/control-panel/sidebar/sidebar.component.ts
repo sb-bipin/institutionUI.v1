@@ -25,7 +25,7 @@ export class SidebarComponent {
     { label: 'Users', route: '/control-panel/dashboard/users', faIcon: 'fa-solid fa-users' },
     { label: 'Images', route: '/control-panel/dashboard/gallery', faIcon: 'fa-solid fa-image' },
     { label: 'Event', route: '/control-panel/dashboard/event', faIcon: 'fa-solid fa-calendar' },
-    { label: 'Settings', route: '/control-panel/setting', faIcon: 'fa-solid fa-gear', divider: true },
+    { label: 'Instant Popups', route: '/control-panel/popups', faIcon: 'fa-solid fa-gear', divider: true },
   ];
 
   toggleSidebar(): void {

@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 interface NavItem {
   label: string;
   route: string;
-  iconId: string;
+  faIcon: string;
   divider?: boolean;
 }
 
@@ -21,11 +21,11 @@ export class SidebarComponent {
   isMobileOpen = false;
 
   navItems: NavItem[] = [
-    { label: 'Users', route: '/control-panel/dashboard/users', iconId: 'users' },
-    { label: 'Analytics', route: '/control-panel/analytics', iconId: 'analytics' },
-    { label: 'Dashboard', route: '/control-panel/dashboard', iconId: 'dashboard', divider: true },
-    { label: 'Settings', route: '/control-panel/setting', iconId: 'settings' },
-    { label: 'Notifications', route: '/control-panel/notifications', iconId: 'bell' },
+    { label: 'Dashboard', route: '/control-panel/dashboard', faIcon: 'fa-solid fa-gauge' },
+    { label: 'Users', route: '/control-panel/dashboard/users', faIcon: 'fa-solid fa-users' },
+    { label: 'Images', route: '/control-panel/dashboard/gallery', faIcon: 'fa-solid fa-image' },
+    { label: 'Event', route: '/control-panel/dashboard/event', faIcon: 'fa-solid fa-calendar' },
+    { label: 'Settings', route: '/control-panel/setting', faIcon: 'fa-solid fa-gear', divider: true },
   ];
 
   toggleSidebar(): void {

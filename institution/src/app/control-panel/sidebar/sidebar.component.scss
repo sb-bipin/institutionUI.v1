@@ -12,7 +12,6 @@
     flex-shrink: 0;
     z-index: 100;
 
-    // ── Collapsed state ──────────────────────────────────────
     &.collapsed {
         width: 60px;
 
@@ -25,8 +24,7 @@
             pointer-events: none;
         }
 
-        // Arrow flips to point right → signals "click to expand"
-        .cp-sidebar__toggle svg {
+        .cp-sidebar__toggle i {
             transform: rotate(180deg);
         }
 
@@ -41,7 +39,6 @@
             gap: 0;
         }
 
-        // Keep brand icon centered, push toggle to its own row
         .cp-sidebar__brand-icon {
             margin: 0 auto;
         }
@@ -59,7 +56,6 @@
         }
     }
 
-    // ── Brand ────────────────────────────────────────────────
     &__brand {
         display: flex;
         align-items: center;
@@ -80,6 +76,8 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        color: #fff;
+        font-size: 13px;
     }
 
     &__brand-label {
@@ -103,9 +101,10 @@
         justify-content: center;
         cursor: pointer;
         color: #94a3b8;
-        transition: background 0.15s;
+        transition: background 0.15s, color 0.15s;
 
-        svg {
+        i {
+            font-size: 12px;
             transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -115,7 +114,6 @@
         }
     }
 
-    // ── Nav ──────────────────────────────────────────────────
     &__nav {
         list-style: none;
         margin: 0;
@@ -126,6 +124,8 @@
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: #e2e8f0 transparent;
     }
 
     &__link {
@@ -150,6 +150,10 @@
             background: #eef2ff;
             color: #4338ca;
             font-weight: 500;
+
+            .cp-sidebar__icon i {
+                color: #4338ca;
+            }
         }
     }
 
@@ -161,6 +165,16 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+
+        i {
+            font-size: 14px;
+            color: #94a3b8;
+            transition: color 0.14s;
+        }
+    }
+
+    &__link:hover &__icon i {
+        color: #475569;
     }
 
     &__label {
@@ -175,7 +189,6 @@
         list-style: none;
     }
 
-    // ── Footer ───────────────────────────────────────────────
     &__footer {
         padding: 10px 8px 14px;
         border-top: 1px solid #e2e8f0;
@@ -232,13 +245,11 @@
         white-space: nowrap;
     }
 
-    // ── Mobile overlay ────────────────────────────────────────
     &__overlay {
         display: none;
     }
 }
 
-// ── Mobile breakpoint ─────────────────────────────────────
 @media (max-width: 768px) {
     .cp-sidebar {
         position: fixed;
@@ -250,7 +261,7 @@
         transition: transform 0.26s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: none;
 
-        // Always show full labels on mobile drawer
+        // Always show labels on mobile regardless of collapsed state
         .cp-sidebar__brand-label,
         .cp-sidebar__label,
         .cp-sidebar__user-info {
@@ -279,7 +290,7 @@
             height: 26px !important;
         }
 
-        .cp-sidebar__toggle svg {
+        .cp-sidebar__toggle i {
             transform: none !important;
         }
 
@@ -304,6 +315,24 @@
         &.visible {
             opacity: 1;
             pointer-events: auto;
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cp-sidebar {
+        width: 180px;
+
+        &.collapsed {
+            width: 56px;
+        }
+
+        &__brand-label {
+            font-size: 12px;
+        }
+
+        &__link {
+            font-size: 13px;
         }
     }
 }

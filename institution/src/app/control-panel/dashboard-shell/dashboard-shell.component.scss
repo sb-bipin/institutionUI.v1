@@ -16,7 +16,6 @@
     padding: 1.5rem;
 }
 
-// Hidden on desktop
 .cp-topbar {
     display: none;
     align-items: center;
@@ -61,7 +60,7 @@
     }
 
     .cp-shell__body {
-        display: block; // sidebar is position:fixed on mobile, so block is fine
+        display: block;
     }
 
     .cp-content {

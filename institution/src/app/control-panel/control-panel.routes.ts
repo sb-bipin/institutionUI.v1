@@ -24,18 +24,19 @@ export const controlPanelRoutes: Routes = [
                     import('./auth-control-panel/user-list/user-list.component')
                         .then(m => m.UserListComponent)
             },
-            // {
-            //     path: 'users',
-            //     loadComponent: () =>
-            //         import('./pages/users/users.component')
-            //             .then(m => m.UsersComponent)
-            // },
-            // {
-            //     path: 'settings',
-            //     loadComponent: () =>
-            //         import('./pages/settings/settings.component')
-            //             .then(m => m.SettingsComponent)
-            // },
+            {
+                path: 'gallery',
+                loadComponent: () =>
+                    import('./pages-control-panel/gallery/gallery.component')
+                        .then(m => m.GalleryComponent)
+            },
+            {
+                path: 'event',
+                loadComponent: () =>
+                    import('./pages-control-panel/event/event.component')
+                        .then(m => m.EventComponent)
+            },
         ]
     }
+
 ];

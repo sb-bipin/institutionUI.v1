@@ -1,0 +1,120 @@
+<div class="gallery-page">
+
+    <header class="gallery-header">
+        <div class="gallery-header__inner">
+            <h1 class="gallery-header__title">Image Gallery</h1>
+            <p class="gallery-header__sub">Upload images with titles and descriptions to build your collection.</p>
+        </div>
+        <div class="gallery-header__count" *ngIf="items().length > 0">
+            <span>{{ items().length }}</span> {{ items().length === 1 ? 'entry' : 'entries' }}
+        </div>
+    </header>
+
+    <section class="upload-section">
+        <div class="upload-card">
+
+            <div class="upload-card__drop-zone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                (drop)="onDrop($event)" [class.has-preview]="previewUrl()">
+
+                <ng-container *ngIf="!previewUrl(); else preview">
+                    <div class="upload-card__drop-inner">
+                        <div class="upload-card__drop-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <p class="upload-card__drop-title">Drop image here</p>
+                        <p class="upload-card__drop-sub">or click to browse</p>
+                        <label class="upload-card__browse-btn">
+                            <input type="file" accept="image/*" (change)="onFileChange($event)" hidden>
+                            Choose File
+                        </label>
+                    </div>
+                </ng-container>
+
+                <ng-template #preview>
+                    <div class="upload-card__preview-wrap">
+                        <img [src]="previewUrl()!" alt="Preview" class="upload-card__preview-img">
+                        <button class="upload-card__remove-preview"
+                            (click)="previewUrl.set(null); form.imageFile = null">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <label class="upload-card__reselect">
+                            <input type="file" accept="image/*" (change)="onFileChange($event)" hidden>
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Change
+                        </label>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div class="upload-card__fields">
+                <div class="field-group">
+                    <label class="field-label">Title <span class="required">*</span></label>
+                    <input class="field-input" type="text" [(ngModel)]="form.title" placeholder="Enter image title"
+                        maxlength="80">
+                    <span class="field-hint">{{ form.title.length }}/80</span>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Description</label>
+                    <textarea class="field-textarea" [(ngModel)]="form.description"
+                        placeholder="Add a short description (optional)" rows="3" maxlength="300"></textarea>
+                    <span class="field-hint">{{ form.description.length }}/300</span>
+                </div>
+
+                <button class="submit-btn" [class.loading]="isSubmitting()"
+                    [disabled]="!isFormValid() || isSubmitting()" (click)="submit()">
+                    <span *ngIf="!isSubmitting()">
+                        <i class="fa-solid fa-plus"></i> Add to Gallery
+                    </span>
+                    <span *ngIf="isSubmitting()">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Adding…
+                    </span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="gallery-grid-section" *ngIf="items().length > 0">
+        <div class="gallery-grid">
+            @for (item of items(); track item.id) {
+            <div class="gallery-card" (click)="openLightbox(item)">
+                <div class="gallery-card__img-wrap">
+                    <img [src]="item.imageUrl" [alt]="item.title" class="gallery-card__img" loading="lazy">
+                    <div class="gallery-card__overlay">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                </div>
+                <div class="gallery-card__body">
+                    <h3 class="gallery-card__title">{{ item.title }}</h3>
+                    <p class="gallery-card__desc" *ngIf="item.description">{{ item.description }}</p>
+                </div>
+                <button class="gallery-card__delete" (click)="$event.stopPropagation(); removeItem(item.id)"
+                    title="Remove">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+            }
+        </div>
+    </section>
+
+    <div class="gallery-empty" *ngIf="items().length === 0">
+        <i class="fa-regular fa-image gallery-empty__icon"></i>
+        <p class="gallery-empty__text">No images yet — add your first one above.</p>
+    </div>
+
+    <div class="lightbox" *ngIf="lightboxItem()" (click)="closeLightbox()">
+        <div class="lightbox__box" (click)="$event.stopPropagation()">
+            <button class="lightbox__close" (click)="closeLightbox()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="lightbox__img-wrap">
+                <img [src]="lightboxItem()!.imageUrl" [alt]="lightboxItem()!.title" class="lightbox__img">
+            </div>
+            <div class="lightbox__info">
+                <h2 class="lightbox__title">{{ lightboxItem()!.title }}</h2>
+                <p class="lightbox__desc" *ngIf="lightboxItem()!.description">{{ lightboxItem()!.description }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

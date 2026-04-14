@@ -25,7 +25,6 @@ interface Toast {
 })
 export class UserListComponent implements OnInit {
 
-  // ── State ────────────────────────────────────────────────
   users = signal<User[]>([]);
   searchQuery = signal('');
   isLoading = signal(false);
@@ -49,7 +48,6 @@ export class UserListComponent implements OnInit {
     userId: '', newPassword: '', confirm: ''
   });
 
-  // ── Computed ─────────────────────────────────────────────
   filteredUsers = computed(() => {
     const q = this.searchQuery().toLowerCase().trim();
     if (!q) return this.users();
@@ -66,7 +64,6 @@ export class UserListComponent implements OnInit {
     this.loadUsers();
   }
 
-  // ── Helpers ──────────────────────────────────────────────
   getInitials(name: string): string {
     return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
   }
@@ -76,7 +73,6 @@ export class UserListComponent implements OnInit {
     setTimeout(() => this.toast.set(null), 3500);
   }
 
-  // ── Load ─────────────────────────────────────────────────
   loadUsers(): void {
     this.isLoading.set(true);
     this.userService.getAllUsers().subscribe({
@@ -91,7 +87,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  // ── Create ───────────────────────────────────────────────
   openCreate(): void {
     this.createForm.set({ firstName: '', lastName: '', username: '', email: '', password: '', status: 'active' });
     this.showCreateModal.set(true);
@@ -130,13 +125,11 @@ export class UserListComponent implements OnInit {
     this.createForm.update(f => ({ ...f, [key]: value }));
   }
 
-  // ── View ─────────────────────────────────────────────────
   openView(user: User): void {
     this.selectedUser.set(user);
     this.showViewModal.set(true);
   }
 
-  // ── Edit ─────────────────────────────────────────────────
   openEdit(user: User): void {
     this.editForm.set({ ...user, newPassword: '' });
     this.selectedUser.set(user);
@@ -176,7 +169,6 @@ export class UserListComponent implements OnInit {
     this.editForm.update(f => ({ ...f, [key]: value }));
   }
 
-  // ── Reset Password ────────────────────────────────────────
   openResetPassword(user: EditUserForm): void {
     this.resetForm.set({ userId: user.id, newPassword: '', confirm: '' });
     this.showResetModal.set(true);
@@ -209,7 +201,6 @@ export class UserListComponent implements OnInit {
     this.resetForm.update(f => ({ ...f, [key]: value }));
   }
 
-  // ── Close ─────────────────────────────────────────────────
   closeAll(): void {
     this.showCreateModal.set(false);
     this.showViewModal.set(false);

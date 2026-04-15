@@ -88,6 +88,9 @@
                     <h3 class="gallery-card__title">{{ item.title }}</h3>
                     <p class="gallery-card__desc" *ngIf="item.description">{{ item.description }}</p>
                 </div>
+                <button class="gallery-card__edit" (click)="$event.stopPropagation(); openEditModal(item)" title="Edit">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
                 <button class="gallery-card__delete" (click)="$event.stopPropagation(); removeItem(item.id)"
                     title="Remove">
                     <i class="fa-solid fa-trash-can"></i>
@@ -117,4 +120,42 @@
         </div>
     </div>
 
+</div>
+
+<div class="edit-modal" *ngIf="isEditing()" (click)="closeEditModal()">
+    <div class="edit-modal__content" (click)="$event.stopPropagation()">
+        <div class="edit-modal__header">
+            <h3>Edit Image</h3>
+            <button class="edit-modal__close" (click)="closeEditModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="edit-modal__body">
+            <div class="edit-modal__image-area">
+                <img [src]="editPreviewUrl()" alt="Preview" class="edit-modal__preview">
+                <label class="edit-modal__change-image">
+                    <input type="file" accept="image/*" (change)="onEditFileChange($event)" hidden>
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Change Image
+                </label>
+            </div>
+            <div class="edit-modal__fields">
+                <div class="field-group">
+                    <label>Title *</label>
+                    <input type="text" [(ngModel)]="editForm.title" maxlength="80" placeholder="Image title">
+                </div>
+                <div class="field-group">
+                    <label>Description</label>
+                    <textarea [(ngModel)]="editForm.description" rows="3" maxlength="300"
+                        placeholder="Optional description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="edit-modal__footer">
+            <button class="btn-cancel" (click)="closeEditModal()">Cancel</button>
+            <button class="btn-save" [disabled]="!editForm.title.trim() || isSubmitting()" (click)="updateItem()">
+                @if (isSubmitting()) { <i class="fa-solid fa-spinner fa-spin"></i> Saving... }
+                @else { Save Changes }
+            </button>
+        </div>
+    </div>
 </div>

@@ -468,7 +468,35 @@
         }
     }
 
+    &__edit {
+        position: absolute;
+        top: 10px;
+        right: 50px; // position left of delete button
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--clr-accent);
+        border: 1px solid rgba(45, 90, 61, 0.15);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        opacity: 0;
+        transition: opacity 0.18s, background 0.15s;
+        z-index: 3;
+
+        &:hover {
+            background: var(--clr-accent-light);
+        }
+    }
+
     &:hover &__delete {
+        opacity: 1;
+    }
+
+    &:hover &__edit {
         opacity: 1;
     }
 }
@@ -604,5 +632,171 @@
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
+    }
+}
+
+// Edit Modal Styles (added after lightbox)
+.edit-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+
+    &__content {
+        background: var(--clr-surface);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 560px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.25s ease;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--clr-border);
+
+        h3 {
+            margin: 0;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            color: var(--clr-text);
+        }
+    }
+
+    &__close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: var(--clr-muted);
+        transition: color 0.15s;
+
+        &:hover {
+            color: var(--clr-danger);
+        }
+    }
+
+    &__body {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__image-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__preview {
+        width: 100%;
+        max-height: 240px;
+        object-fit: contain;
+        border-radius: 12px;
+        background: var(--clr-bg);
+        border: 1px solid var(--clr-border);
+    }
+
+    &__change-image {
+        background: var(--clr-accent-light);
+        padding: 8px 16px;
+        border-radius: 40px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--clr-accent);
+        cursor: pointer;
+        transition: background 0.15s;
+
+        &:hover {
+            background: darken(#e8f0ea, 4%);
+        }
+    }
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .field-group {
+            label {
+                font-weight: 600;
+                font-size: 13px;
+                margin-bottom: 6px;
+                display: block;
+                color: var(--clr-text);
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 10px 14px;
+                border: 1.5px solid var(--clr-border);
+                border-radius: 10px;
+                font-family: var(--font-body);
+                font-size: 14px;
+                background: var(--clr-bg);
+                transition: all 0.15s;
+
+                &:focus {
+                    border-color: var(--clr-accent);
+                    outline: none;
+                    background: white;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--clr-border);
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+
+        .btn-cancel {
+            background: #f1f1f1;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+
+            &:hover {
+                background: #e4e4e4;
+            }
+        }
+
+        .btn-save {
+            background: var(--clr-accent);
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &:hover:not(:disabled) {
+                background: darken(#2d5a3d, 6%);
+            }
+        }
     }
 }

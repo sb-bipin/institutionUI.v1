@@ -1,4 +1,5 @@
-// src/app/components/gallery/gallery.component.ts
+// gallery.component.ts (updated)
+
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +26,18 @@ export class GalleryComponent implements OnInit {
   errorMessage = signal<string | null>(null);
   lightboxItem = signal<GalleryItem | null>(null);
 
+  isEditing = signal(false);
+  editingItem = signal<GalleryItem | null>(null);
+  editPreviewUrl = signal<string | null>(null);
+  editImageFile = signal<File | null>(null);
+
   form = {
+    title: '',
+    description: '',
+    imageFile: null as File | null
+  };
+
+  editForm = {
     title: '',
     description: '',
     imageFile: null as File | null
@@ -63,11 +75,91 @@ export class GalleryComponent implements OnInit {
     });
   }
 
-  onFileChange(event: Event): void {
+  openEditModal(item: GalleryItem): void {
+    this.editingItem.set(item);
+    this.editForm.title = item.title;
+    this.editForm.description = item.description || '';
+    this.editForm.imageFile = null;
+    this.editPreviewUrl.set(item.imageUrl);
+    this.isEditing.set(true);
+  }
+
+  closeEditModal(): void {
+    this.isEditing.set(false);
+    this.editingItem.set(null);
+    this.editForm.title = '';
+    this.editForm.description = '';
+    this.editForm.imageFile = null;
+    this.editPreviewUrl.set(null);
+  }
+
+  onEditFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;
 
+    this.editForm.imageFile = file;
+    const reader = new FileReader();
+    reader.onload = () => this.editPreviewUrl.set(reader.result as string);
+    reader.readAsDataURL(file);
+  }
+
+  updateItem(): void {
+    const item = this.editingItem();
+    if (!item) return;
+
+    const formData = new FormData();
+    formData.append('Id', item.id);
+    formData.append('Title', this.editForm.title.trim());
+    formData.append('Description', this.editForm.description.trim());
+    if (this.editForm.imageFile) {
+      formData.append('ImageFile', this.editForm.imageFile);
+    }
+
+    this.isSubmitting.set(true);
+    this.galleryService.update(item.id, formData).subscribe({
+      next: (updatedItem) => {
+        const fixedItem = {
+          ...updatedItem,
+          imageUrl: this.galleryService.getCorrectImageUrl(updatedItem.imageUrl)
+        };
+        this.items.update(prev => prev.map(i => i.id === item.id ? fixedItem : i));
+        this.closeEditModal();
+        this.isSubmitting.set(false);
+        Swal.fire({
+          icon: 'success',
+          title: 'Updated!',
+          text: 'Image details have been updated.',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      },
+      error: (err) => {
+        console.error('Update failed', err);
+        let errorMsg = 'Update failed. ';
+        if (err.error?.errors) {
+          errorMsg += err.error.errors.join(', ');
+        } else if (err.error?.message) {
+          errorMsg += err.error.message;
+        } else {
+          errorMsg += 'Please try again.';
+        }
+        this.isSubmitting.set(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Update Failed',
+          text: errorMsg,
+          confirmButtonColor: '#d33'
+        });
+      }
+    });
+  }
+
+
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
     this.form.imageFile = file;
     const reader = new FileReader();
     reader.onload = () => this.previewUrl.set(reader.result as string);
@@ -88,7 +180,6 @@ export class GalleryComponent implements OnInit {
     (event.currentTarget as HTMLElement).classList.remove('drag-over');
     const file = event.dataTransfer?.files?.[0];
     if (!file || !file.type.startsWith('image/')) return;
-
     this.form.imageFile = file;
     const reader = new FileReader();
     reader.onload = () => this.previewUrl.set(reader.result as string);
@@ -101,13 +192,11 @@ export class GalleryComponent implements OnInit {
 
   submit(): void {
     if (!this.isFormValid() || !this.previewUrl()) return;
-
     this.isSubmitting.set(true);
     const formData = new FormData();
     formData.append('Title', this.form.title.trim());
     formData.append('Description', this.form.description.trim());
     formData.append('ImageFile', this.form.imageFile!);
-
     this.galleryService.create(formData).subscribe({
       next: (newItem) => {
         const fixedItem = {
@@ -118,7 +207,6 @@ export class GalleryComponent implements OnInit {
         this.form = { title: '', description: '', imageFile: null };
         this.previewUrl.set(null);
         this.isSubmitting.set(false);
-
         Swal.fire({
           icon: 'success',
           title: 'Upload Successful!',
@@ -138,7 +226,6 @@ export class GalleryComponent implements OnInit {
           errorMsg += 'Please check file size/format.';
         }
         this.isSubmitting.set(false);
-
         Swal.fire({
           icon: 'error',
           title: 'Upload Failed',
@@ -164,7 +251,6 @@ export class GalleryComponent implements OnInit {
           next: () => {
             this.items.update(prev => prev.filter(i => i.id !== id));
             if (this.lightboxItem()?.id === id) this.lightboxItem.set(null);
-
             Swal.fire({
               icon: 'success',
               title: 'Deleted!',
@@ -194,6 +280,4 @@ export class GalleryComponent implements OnInit {
   closeLightbox(): void {
     this.lightboxItem.set(null);
   }
-
-
 }

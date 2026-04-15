@@ -17,21 +17,25 @@ interface ServiceResponse<T> {
 
 @Injectable({ providedIn: 'root' })
 export class GalleryService {
-
     private readonly API = `${environment.apiBaseUrl}`;
-
     private apiUrl = `${this.API}/ImageGallery`;
 
     constructor(private http: HttpClient) { }
 
     getAll(): Observable<GalleryItem[]> {
-        return this.http.get<ServiceResponse<GalleryItem[]>>(this.apiUrl).pipe(
+        return this.http.get<ServiceResponse<GalleryItem[]>>(`${this.apiUrl}/getAll`).pipe(
             map(response => response.data)
         );
     }
 
     create(formData: FormData): Observable<GalleryItem> {
-        return this.http.post<ServiceResponse<GalleryItem>>(this.apiUrl, formData).pipe(
+        return this.http.post<ServiceResponse<GalleryItem>>(`${this.apiUrl}/create`, formData).pipe(
+            map(response => response.data)
+        );
+    }
+
+    update(id: string, formData: FormData): Observable<GalleryItem> {
+        return this.http.put<ServiceResponse<GalleryItem>>(`${this.apiUrl}/update/${id}`, formData).pipe(
             map(response => response.data)
         );
     }
@@ -45,6 +49,6 @@ export class GalleryService {
     public getCorrectImageUrl(wrongUrl: string): string {
         const filename = wrongUrl.split('/').pop();
         if (!filename) return wrongUrl;
-        return `${this.apiUrl}/${filename}`;
+        return `${this.apiUrl}/image/${filename}`;
     }
 }

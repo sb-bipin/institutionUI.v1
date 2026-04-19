@@ -1,0 +1,50 @@
+// src/app/features/admin/notice-entry.component.scss
+.notice-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+}
+
+.card-img-top-wrapper {
+    height: 180px;
+    overflow: hidden;
+
+    .card-img-top {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.placeholder-img {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+}
+
+@media (max-width: 576px) {
+
+    .card-img-top-wrapper,
+    .placeholder-img {
+        height: 140px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+}

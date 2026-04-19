@@ -1,1 +1,125 @@
-<p>notice-entry works!</p>
+<!-- src/app/features/admin/notice-entry.component.html -->
+<div class="container-fluid mt-4">
+    <!-- Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h2 class="mb-2 mb-sm-0">
+            <i class="fas fa-bullhorn me-2"></i> Manage Notices
+        </h2>
+        <button class="btn btn-primary" (click)="openAddModal()">
+            <i class="fas fa-plus me-1"></i> Add Notice
+        </button>
+    </div>
+
+    <!-- Loading & Error -->
+    <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Notices Grid (Responsive Cards) -->
+    <div *ngIf="!loading && !error" class="row g-4">
+        <div *ngFor="let notice of notices" class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm notice-card">
+                <!-- Image (if exists) -->
+                <div *ngIf="notice.imageUrl" class="card-img-top-wrapper">
+                    <img [src]="notice.imageUrl" class="card-img-top" [alt]="notice.title">
+                </div>
+                <div *ngIf="!notice.imageUrl" class="card-img-top placeholder-img bg-light text-center py-4">
+                    <i class="fas fa-newspaper fa-3x text-secondary"></i>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title">{{ notice.title }}</h5>
+                        <span *ngIf="notice.important" class="badge bg-danger">Important</span>
+                    </div>
+                    <p class="card-text text-muted small">
+                        <i class="far fa-calendar-alt me-1"></i> {{ formatDate(notice.date) }}
+                    </p>
+                    <p class="card-text">{{ notice.description | slice:0:120 }}{{ notice.description.length > 120 ?
+                        '...' : '' }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 d-flex justify-content-end gap-2">
+                    <button class="btn btn-sm btn-outline-warning" (click)="openEditModal(notice)">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(notice)">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal fade" id="noticeFormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">
+                    <i class="fas" [ngClass]="isEditMode ? 'fa-edit' : 'fa-plus-circle'"></i>
+                    {{ isEditMode ? 'Edit Notice' : 'Add New Notice' }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="noticeForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="title" formControlName="title"
+                            placeholder="Enter notice title">
+                        <div class="text-danger small"
+                            *ngIf="noticeForm.get('title')?.invalid && noticeForm.get('title')?.touched">
+                            Title is required (min 3 characters)
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description <span
+                                class="text-danger">*</span></label>
+                        <textarea class="form-control" id="description" rows="3" formControlName="description"
+                            placeholder="Enter description"></textarea>
+                        <div class="text-danger small"
+                            *ngIf="noticeForm.get('description')?.invalid && noticeForm.get('description')?.touched">
+                            Description is required (min 10 characters)
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" id="date" formControlName="date">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="important" formControlName="important">
+                        <label class="form-check-label" for="important">Mark as Important</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imageFile" class="form-label">Image (optional)</label>
+                        <input type="file" class="form-control" id="imageFile" (change)="onFileSelected($event)"
+                            accept="image/*">
+                        <div *ngIf="imagePreview" class="mt-2 text-center">
+                            <img [src]="imagePreview" class="img-fluid rounded" style="max-height: 150px;">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="noticeForm.invalid || isSubmitting">
+                            <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-1"></span>
+                            {{ isSubmitting ? 'Saving...' : (isEditMode ? 'Update' : 'Create') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

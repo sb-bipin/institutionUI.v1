@@ -48,6 +48,12 @@ export const controlPanelRoutes: Routes = [
                     import('./pages-control-panel/news-entry/news-entry.component')
                         .then(m => m.NewsEntryComponent)
             },
+            {
+                path: 'notices',
+                loadComponent: () =>
+                    import('./pages-control-panel/notice-entry/notice-entry.component')
+                        .then(m => m.NoticeEntryComponent)
+            },
         ]
     }
 

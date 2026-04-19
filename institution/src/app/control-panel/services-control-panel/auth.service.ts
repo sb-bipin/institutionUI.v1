@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environments';
-import { LoginUser, LoginPayload, ServiceResponse, LoginResponseDto } from '../models-control-panel/auth.model';
+import { LoginUser, LoginPayload, LoginResponseDto } from '../models-control-panel/auth.model';
+import { ServiceResponse } from '../models-control-panel/api.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

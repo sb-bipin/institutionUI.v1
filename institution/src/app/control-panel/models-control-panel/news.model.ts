@@ -22,8 +22,3 @@ export interface UpdateNewsDto extends Partial<CreateNewsDto> {
     imageUrl?: File;
 }
 
-export interface NewsApiResponse {
-    success: boolean;
-    message?: string;
-    data?: NewsItem | NewsItem[];
-}

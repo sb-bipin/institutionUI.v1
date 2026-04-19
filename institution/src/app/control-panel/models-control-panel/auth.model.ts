@@ -7,12 +7,6 @@ export interface LoginResponseDto {
     token: string;
 }
 
-export interface ServiceResponse<T> {
-    success: boolean;
-    message: string;
-    data: T;
-}
-
 export interface LoginUser {
     id: string;
     email: string;

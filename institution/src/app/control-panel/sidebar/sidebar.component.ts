@@ -25,6 +25,7 @@ export class SidebarComponent {
     { label: 'Users', route: '/control-panel/dashboard/users', faIcon: 'fa-solid fa-users' },
     { label: 'Images', route: '/control-panel/dashboard/gallery', faIcon: 'fa-solid fa-image' },
     { label: 'Event', route: '/control-panel/dashboard/event', faIcon: 'fa-solid fa-calendar' },
+    { label: 'News', route: '/control-panel/dashboard/news', faIcon: 'fa-solid fa-newspaper' },
     { label: 'Instant Popups', route: '/control-panel/popups', faIcon: 'fa-solid fa-gear', divider: true },
   ];
 

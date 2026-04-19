@@ -169,8 +169,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 1,
         title: 'New Computer Science Program Launches This Fall',
-        excerpt: 'Our institution is proud to announce the launch of an innovative Computer Science program featuring AI and Machine Learning specializations.',
-        content: 'Full article content here...',
+        description: 'Our institution is proud to announce the launch of an innovative Computer Science program featuring AI and Machine Learning specializations.',
         author: 'Dr. Sarah Johnson',
         publishDate: new Date('2024-01-10'),
         imageUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop',
@@ -178,8 +177,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 2,
         title: 'Annual Science Fair: Students Showcase Groundbreaking Projects',
-        excerpt: 'Over 200 students participated in our annual science fair, presenting innovative projects across various scientific disciplines.',
-        content: 'Full article content here...',
+        description: 'Over 200 students participated in our annual science fair, presenting innovative projects across various scientific disciplines.',
         author: 'Prof. Michael Chen',
         publishDate: new Date('2024-01-08'),
         imageUrl: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=500&fit=crop',
@@ -187,8 +185,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       {
         id: 3,
         title: 'Campus Receives State-of-the-Art Learning Technology Grant',
-        excerpt: 'A $2 million grant will fund new digital learning tools and smart classroom technology across campus.',
-        content: 'Full article content here...',
+        description: 'A $2 million grant will fund new digital learning tools and smart classroom technology across campus.',
         author: 'Admin Office',
         publishDate: new Date('2024-01-05'),
         imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop',

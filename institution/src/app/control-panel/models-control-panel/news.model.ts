@@ -1,8 +1,8 @@
 export interface NewsItem {
     id: string;
     title: string;
-    excerpt: string;
-    content: string;
+    description: string;
+    newsURL: string;
     author: string;
     publishDate: Date;
     imageUrl: string;
@@ -10,16 +10,16 @@ export interface NewsItem {
 
 export interface CreateNewsDto {
     title: string;
-    excerpt: string;
-    content: string;
+    description: string;
+    newsURL: string;
     author: string;
     publishDate: Date;
-    imageFile?: File;
+    imageUrl?: File;
 }
 
 export interface UpdateNewsDto extends Partial<CreateNewsDto> {
     id: string;
-    imageFile?: File;
+    imageUrl?: File;
 }
 
 export interface NewsApiResponse {

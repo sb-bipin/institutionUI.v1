@@ -42,6 +42,12 @@ export const controlPanelRoutes: Routes = [
                     import('./pages-control-panel/event/events.component')
                         .then(m => m.EventsComponent)
             },
+            {
+                path: 'news',
+                loadComponent: () =>
+                    import('./pages-control-panel/news-entry/news-entry.component')
+                        .then(m => m.NewsEntryComponent)
+            },
         ]
     }
 

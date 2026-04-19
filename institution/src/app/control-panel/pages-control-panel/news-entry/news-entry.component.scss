@@ -1,0 +1,49 @@
+// src/app/features/admin/news-entry.component.scss
+.container {
+    max-width: 1400px;
+}
+
+.news-thumbnail {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.image-preview {
+    max-height: 150px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+
+    th,
+    td {
+        vertical-align: middle;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+.modal-lg {
+    max-width: 800px;
+}
+
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+
+    .btn-sm {
+        margin-bottom: 0.25rem;
+    }
+}

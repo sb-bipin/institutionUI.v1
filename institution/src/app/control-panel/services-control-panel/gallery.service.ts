@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class GalleryService {
     private readonly API = `${environment.apiBaseUrl}`;
     private apiUrl = `${this.API}/ImageGallery`;
 
-    constructor(private http: HttpClient) { }
+    private readonly http = inject(HttpClient);
 
     getAll(): Observable<GalleryItem[]> {
         return this.http.get<ServiceResponse<GalleryItem[]>>(`${this.apiUrl}/getAll`).pipe(

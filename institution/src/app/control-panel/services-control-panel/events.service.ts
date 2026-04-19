@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Events } from '../models-control-panel/events.model';
@@ -10,7 +10,7 @@ export class EventService {
     private readonly API = `${environment.apiBaseUrl}`;
     private apiUrl = `${this.API}/Events`;
 
-    constructor(private http: HttpClient) { }
+    private readonly http = inject(HttpClient);
 
     getEvents(): Observable<Events[]> {
         return this.http.get<ServiceResponse<Events[]>>(this.apiUrl).pipe(

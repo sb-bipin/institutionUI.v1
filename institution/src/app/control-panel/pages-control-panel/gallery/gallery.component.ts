@@ -1,9 +1,6 @@
-// gallery.component.ts (updated)
-
 import { Component, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { GalleryItem } from '../../models-control-panel/gallery-item.model';
 import { GalleryService } from '../../services-control-panel/gallery.service';
@@ -12,7 +9,7 @@ import { environment } from '../../../../environments/environments';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
 })
@@ -187,7 +184,7 @@ export class GalleryComponent implements OnInit {
   }
 
   isFormValid(): boolean {
-    return !!this.form.title.trim() && !!this.form.imageFile;
+    return !!this.form.title.trim() && !!this.form.imageFile && !!this.form.description.trim();
   }
 
   submit(): void {

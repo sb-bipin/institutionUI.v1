@@ -52,7 +52,11 @@ export class NoticeEntryComponent implements OnInit, OnDestroy {
     this.error = null;
     this.noticeService.getAllNotices().subscribe({
       next: (data) => {
-        this.notices = data;
+        const fixedItems = data.map(notice => ({
+          ...notice,
+          imageUrl: this.noticeService.getCorrectImageUrl(notice.imageUrl)
+        }));
+        this.notices = fixedItems;
         this.loading = false;
       },
       error: (err) => {
@@ -147,11 +151,10 @@ export class NoticeEntryComponent implements OnInit, OnDestroy {
       }
       this.noticeService.updateNotice(this.editingNoticeId, updateData).subscribe({
         next: (updated) => {
-          const index = this.notices.findIndex(n => n.id === this.editingNoticeId);
-          if (index !== -1) this.notices[index] = updated;
           this.hideFormModal();
           this.resetForm();
           this.isSubmitting = false;
+          this.loadNotices();
           Swal.fire('Updated!', 'Notice has been updated.', 'success');
         },
         error: (err) => {

@@ -74,4 +74,11 @@ export class NewsService {
         const message = error.error?.message || 'An error occurred. Please try again.';
         return throwError(() => new Error(message));
     }
+
+    public getCorrectImageUrl(wrongUrl: string): string {
+        const filename = wrongUrl.split('/').pop();
+        if (!filename) return wrongUrl;
+        return `${this.API}/ImageGallery/image/${filename}`;
+    }
+
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit, inject, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NewsItem } from '../../models-control-panel/news.model';
 import { NewsService } from '../../services-control-panel/news.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-news-entry',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SlicePipe],
   templateUrl: './news-entry.component.html',
   styleUrls: ['./news-entry.component.scss']
 })
@@ -26,8 +27,12 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
   imagePreview: string | null = null;
   isSubmitting = false;
 
+  selectedNews: NewsItem | null = null;
+  viewingNews: NewsItem | null = null;
+
   private deleteModalInstance: any;
   private formModalInstance: any;
+  private viewModalInstance: any;
 
   ngOnInit(): void {
     this.initForm();
@@ -35,8 +40,9 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.deleteModalInstance) this.deleteModalInstance.dispose?.();
-    if (this.formModalInstance) this.formModalInstance.dispose?.();
+    this.deleteModalInstance?.dispose?.();
+    this.formModalInstance?.dispose?.();
+    this.viewModalInstance?.dispose?.();
   }
 
   initForm(): void {
@@ -54,7 +60,10 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
     this.error = null;
     this.newsService.getAllNews().subscribe({
       next: (news) => {
-        this.newsItems = news;
+        this.newsItems = news.map(item => ({
+          ...item,
+          imageUrl: this.newsService.getCorrectImageUrl(item.imageUrl)
+        }));
         this.loading = false;
       },
       error: (err) => {
@@ -67,6 +76,17 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
   formatDate(date: Date | string): string {
     const d = new Date(date);
     return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.style.display = 'none';
+  }
+
+  switchToEdit(): void {
+    if (!this.viewingNews) return;
+    const news = this.viewingNews;
+    setTimeout(() => this.openEditModal(news), 350);
   }
 
   openAddModal(): void {
@@ -86,9 +106,7 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
       author: news.author,
       publishDate: new Date(news.publishDate).toISOString().split('T')[0]
     });
-    if (news.imageUrl) {
-      this.imagePreview = news.imageUrl;
-    }
+    this.imagePreview = news.imageUrl ?? null;
     this.showFormModal();
   }
 
@@ -105,11 +123,8 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
     if (this.formModalInstance) {
       this.formModalInstance.hide();
     } else {
-      const modalElement = document.getElementById('newsFormModal');
-      if (modalElement) {
-        const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
-        modal?.hide();
-      }
+      const el = document.getElementById('newsFormModal');
+      (window as any).bootstrap.Modal.getInstance(el)?.hide();
     }
   }
 
@@ -146,36 +161,33 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
         description: formValue.description,
         newsURL: formValue.newsURL,
         author: formValue.author,
-        publishDate: publishDate
+        publishDate
       };
-      if (this.selectedFile) {
-        updateData.imageUrl = this.selectedFile;
-      }
+      if (this.selectedFile) updateData.imageUrl = this.selectedFile;
+
       this.newsService.updateNews(this.editingNewsId, updateData).subscribe({
         next: (updatedNews) => {
-          const index = this.newsItems.findIndex(n => n.id === this.editingNewsId);
-          if (index !== -1) this.newsItems[index] = updatedNews;
           this.hideFormModal();
           this.resetForm();
           this.isSubmitting = false;
+          this.loadNews();
+          Swal.fire('Updated!', 'Notice has been updated.', 'success');
         },
         error: (err) => {
           this.error = err.message;
           this.isSubmitting = false;
         }
       });
-    }
-    else {
+    } else {
       const createData: any = {
         title: formValue.title,
         description: formValue.description,
         newsURL: formValue.newsURL,
         author: formValue.author,
-        publishDate: publishDate
+        publishDate
       };
-      if (this.selectedFile) {
-        createData.imageUrl = this.selectedFile;
-      }
+      if (this.selectedFile) createData.imageUrl = this.selectedFile;
+
       this.newsService.createNews(createData).subscribe({
         next: (newNews) => {
           this.newsItems.unshift(newNews);
@@ -201,20 +213,16 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectedNews: NewsItem | null = null;
-
   deleteNews(): void {
     if (!this.selectedNews) return;
-
     this.newsService.deleteNews(this.selectedNews.id).subscribe({
       next: () => {
         this.newsItems = this.newsItems.filter(n => n.id !== this.selectedNews?.id);
         if (this.deleteModalInstance) {
           this.deleteModalInstance.hide();
         } else {
-          const modalElement = document.getElementById('deleteModal');
-          const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
-          modal?.hide();
+          const el = document.getElementById('deleteModal');
+          (window as any).bootstrap.Modal.getInstance(el)?.hide();
         }
         this.selectedNews = null;
       },
@@ -222,5 +230,10 @@ export class NewsEntryComponent implements OnInit, OnDestroy {
         this.error = err.message;
       }
     });
+  }
+
+  openUrl(url: string): void {
+    const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+    window.open(fullUrl, '_blank', 'noopener,noreferrer');
   }
 }

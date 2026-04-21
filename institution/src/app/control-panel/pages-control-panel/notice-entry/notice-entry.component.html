@@ -1,6 +1,5 @@
 <!-- src/app/features/admin/notice-entry.component.html -->
 <div class="container-fluid mt-4">
-    <!-- Header -->
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
         <h2 class="mb-2 mb-sm-0">
             <i class="fas fa-bullhorn me-2"></i> Manage Notices
@@ -10,7 +9,6 @@
         </button>
     </div>
 
-    <!-- Loading & Error -->
     <div *ngIf="loading" class="text-center py-5">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -21,13 +19,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <!-- Notices Grid (Responsive Cards) -->
     <div *ngIf="!loading && !error" class="row g-4">
         <div *ngFor="let notice of notices" class="col-12 col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm notice-card">
-                <!-- Image (if exists) -->
                 <div *ngIf="notice.imageUrl" class="card-img-top-wrapper">
-                    <img [src]="notice.imageUrl" class="card-img-top" [alt]="notice.title">
+                    <img [src]="notice.imageUrl" [alt]="notice.title" class="gallery-card__img" loading="lazy">
                 </div>
                 <div *ngIf="!notice.imageUrl" class="card-img-top placeholder-img bg-light text-center py-4">
                     <i class="fas fa-newspaper fa-3x text-secondary"></i>
@@ -57,7 +53,6 @@
     </div>
 </div>
 
-<!-- Add/Edit Modal -->
 <div class="modal fade" id="noticeFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">

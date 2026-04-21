@@ -41,4 +41,10 @@ export class EventService {
             map(() => void 0)
         );
     }
+
+    public getCorrectImageUrl(wrongUrl: string): string {
+        const filename = wrongUrl.split('/').pop();
+        if (!filename) return wrongUrl;
+        return `${this.API}/ImageGallery/image/${filename}`;
+    }
 }

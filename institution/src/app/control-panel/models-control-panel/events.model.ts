@@ -5,6 +5,6 @@ export interface Events {
     date: Date;
     time: string;
     location: string;
-    imageUrl?: string;
+    imageUrl: string;
     organizer: string;
 }

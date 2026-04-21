@@ -45,7 +45,11 @@ export class EventsComponent implements OnInit {
   loadEvents() {
     this.eventService.getEvents().subscribe({
       next: (data) => {
-        this.events = data;
+        const fixedItems = data.map(item => ({
+          ...item,
+          imageUrl: this.eventService.getCorrectImageUrl(item.imageUrl)
+        }));
+        this.events = fixedItems;
         this.loading = false;
       },
       error: () => {
@@ -134,7 +138,7 @@ export class EventsComponent implements OnInit {
       next: (updatedEvent) => {
         Swal.fire('Success', `Event ${this.isEditMode ? 'updated' : 'created'}!`, 'success');
         this.hideModal();
-        this.loadEvents(); // Reload to get fresh data including new image URL
+        this.loadEvents();
         this.formSubmitting = false;
       },
       error: (err) => {

@@ -3,7 +3,7 @@ export interface Notice {
     title: string;
     description: string;
     date: Date | string;
-    imageUrl: string | null;
+    imageUrl: string;
     important: boolean;
 }
 

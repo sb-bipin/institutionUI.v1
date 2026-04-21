@@ -11,7 +11,6 @@
     justify-content: center;
 }
 
-
 .nav-item {
     transition: transform 0.3s ease;
 }
@@ -22,13 +21,27 @@
     padding: 0.5rem 1rem;
 }
 
+.main-header {
+    position: relative;
+    z-index: 1050;
+}
+
 @media (min-width: 992px) {
+    .nav-item {
+        overflow: hidden;
+    }
+
+    // ✅ Fix 2: Dropdowns must NOT be clipped
+    .nav-item.dropdown {
+        overflow: visible;
+    }
+
     .nav-item:hover {
         transform: translateY(-3px);
     }
 
     .nav-link {
-        overflow: hidden;
+        overflow: visible;
     }
 
     .nav-link::before {
@@ -66,7 +79,6 @@
         text-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
     }
 
-    /* Special styling for Admission link */
     .nav-link.text-tertiary:hover {
         color: #d63384 !important;
         transform: scale(1.1);
@@ -89,9 +101,7 @@
     }
 }
 
-
 @media (min-width: 992px) {
-
     .nav-item.dropdown:hover>.dropdown-menu {
         display: block;
         margin-top: 0;
@@ -122,6 +132,7 @@
     .dropdown-menu {
         max-width: 300px;
         white-space: normal;
+        z-index: 1051;
     }
 }
 

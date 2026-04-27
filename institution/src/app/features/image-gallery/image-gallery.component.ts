@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { GalleryImage } from '../../core/models/image-gallery.model';
 import { GalleryService } from '../../control-panel/services-control-panel/gallery.service';
 
@@ -178,6 +178,7 @@ import { GalleryService } from '../../control-panel/services-control-panel/galle
 export class ImageGalleryComponent implements OnInit {
   selectedImage: GalleryImage | null = null;
   private galleryService = inject(GalleryService);
+  private platformId = inject(PLATFORM_ID);
 
   images: GalleryImage[] = [];
   isLoading = signal(false);
@@ -240,7 +241,11 @@ export class ImageGalleryComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.loadRecentImages();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadRecentImages();
+    } else {
+      this.images = [...this.dummyImages];
+    }
   }
 
   loadRecentImages(): void {
@@ -268,12 +273,16 @@ export class ImageGalleryComponent implements OnInit {
 
   openModal(image: GalleryImage): void {
     this.selectedImage = image;
-    document.body.classList.add('modal-open');
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.classList.add('modal-open');
+    }
   }
 
   closeModal(): void {
     this.selectedImage = null;
-    document.body.classList.remove('modal-open');
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.classList.remove('modal-open');
+    }
   }
 }
 

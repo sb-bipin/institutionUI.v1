@@ -1,0 +1,5 @@
+[build.environment]
+  apiBaseUrl = "https://controlpanel-szgj.onrender.com"
+
+[context.production.environment]
+  apiBaseUrl = "https://controlpanel-szgj.onrender.com"

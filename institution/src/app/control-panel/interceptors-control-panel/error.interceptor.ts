@@ -10,10 +10,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         catchError((error: HttpErrorResponse) => {
             switch (error.status) {
                 case 401:
-                    router.navigate(['/login']);
+                    router.navigate(['/control-panel/login']);
                     break;
                 case 403:
-                    router.navigate(['/forbidden']);
+                    router.navigate(['/control-panel/forbidden']);
                     break;
                 case 500:
                     console.error('Server error:', error.message);

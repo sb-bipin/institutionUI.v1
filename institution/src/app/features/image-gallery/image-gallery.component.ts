@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GalleryImage } from '../../core/models/image-gallery.model';
+import { GalleryService } from '../../control-panel/services-control-panel/gallery.service';
 
 
 @Component({
@@ -174,10 +175,14 @@ import { GalleryImage } from '../../core/models/image-gallery.model';
 
   `]
 })
-export class ImageGalleryComponent {
+export class ImageGalleryComponent implements OnInit {
   selectedImage: GalleryImage | null = null;
+  private galleryService = inject(GalleryService);
 
-  images: GalleryImage[] = [
+  images: GalleryImage[] = [];
+  isLoading = signal(false);
+
+  private dummyImages: GalleryImage[] = [
     {
       id: 1,
       url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
@@ -233,6 +238,33 @@ export class ImageGalleryComponent {
       description: 'Dramatic rock formations and vast landscape'
     }
   ];
+
+  ngOnInit(): void {
+    this.loadRecentImages();
+  }
+
+  loadRecentImages(): void {
+    this.isLoading.set(true);
+
+    this.galleryService.getAll().subscribe({
+      next: (apiItems) => {
+        const apiImages: GalleryImage[] = apiItems.map((item: any) => ({
+          id: item.id,
+          url: this.galleryService.getCorrectImageUrl(item.imageUrl),
+          title: item.title || 'Untitled',
+          description: item.description || ''
+        }));
+
+        this.images = [...apiImages, ...this.dummyImages];
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Failed to load images from API', err);
+        this.images = [...this.dummyImages];
+        this.isLoading.set(false);
+      }
+    });
+  }
 
   openModal(image: GalleryImage): void {
     this.selectedImage = image;
